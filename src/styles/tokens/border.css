@@ -1,0 +1,16 @@
+/* ==========================================================================
+   MAP HOLDING — BORDER TOKENS  (Phase 1 §C.6)
+   ========================================================================== */
+
+:root {
+  --border-w-hair: 0.5px;
+  --border-w-1: 1px;
+  --border-w-2: 2px;
+
+  --border-color-light: var(--color-neutral-300);
+  --border-color-dark: var(--color-neutral-850);
+  --border-color-brand: var(--color-brand-gold-500);
+
+  --border-focus: var(--border-w-2) solid var(--color-focus-ring);
+  --border-default: var(--border-w-1) solid var(--color-border-default);
+}

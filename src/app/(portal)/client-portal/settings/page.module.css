@@ -1,0 +1,168 @@
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  min-width: 0;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-5);
+  min-width: 0;
+}
+
+.note {
+  margin: 0;
+  flex: 1 1 20rem;
+  min-width: 0;
+  font-size: var(--font-size-body-s);
+  line-height: var(--font-line-height-body-s);
+  color: var(--color-text-muted);
+}
+
+.action {
+  flex: none;
+}
+
+/* --- Toggle switches ----------------------------------------------------- */
+
+.settingsRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.settingItem {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.settingLabel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+  min-width: 0;
+}
+
+.settingTitle {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-strong);
+}
+
+.settingDesc {
+  font-size: var(--font-size-body-s);
+  color: var(--color-text-muted);
+}
+
+.toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  cursor: pointer;
+}
+
+.toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggleSlider {
+  display: block;
+  width: 3rem;
+  height: 1.5rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-border-default);
+  transition: background-color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.toggle input:checked + .toggleSlider {
+  background-color: var(--color-brand-gold-500);
+}
+
+.toggleSlider::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-brand-ivory-50);
+  transition: transform var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.toggle input:checked + .toggleSlider::before {
+  transform: translateX(1.5rem);
+}
+
+/* --- Session timeout buttons --------------------------------------------- */
+
+.timeoutGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  flex: none;
+}
+
+.timeoutBtn {
+  padding: var(--space-2) var(--space-3);
+  border: var(--border-w-1) solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  background-color: transparent;
+  color: var(--color-text-default);
+  font-size: var(--font-size-body-s);
+  cursor: pointer;
+  transition:
+    border-color var(--motion-duration-fast) var(--motion-ease-standard),
+    background-color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.timeoutBtn:hover {
+  border-color: var(--color-brand-gold-500);
+  color: var(--color-accent-gold);
+}
+
+.timeoutBtnActive {
+  border-color: var(--color-brand-gold-500);
+  background-color: color-mix(in srgb, var(--color-brand-gold-500) 15%, transparent);
+  color: var(--color-accent-gold);
+}
+
+/* --- Misc ---------------------------------------------------------------- */
+
+.saveBar {
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: var(--border-w-hair) solid var(--color-border-default);
+}
+
+.actionLink {
+  flex: none;
+  font-size: var(--font-size-body-s);
+  color: var(--color-accent-gold);
+  text-decoration: none;
+  border-bottom: var(--border-w-hair) solid color-mix(in srgb, var(--color-accent-gold) 40%, transparent);
+  transition: border-color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.actionLink:hover {
+  border-color: var(--color-accent-gold);
+}
+
+.disabledHint {
+  flex: none;
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+  font-style: italic;
+}

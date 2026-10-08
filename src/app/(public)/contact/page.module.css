@@ -1,0 +1,11 @@
+.heroInner { padding-block: var(--space-10); }
+.lead { max-width: 56ch; }
+.grid { display: grid; gap: var(--space-5); grid-template-columns: 1fr; }
+@media (min-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+.card { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-5); border: var(--border-w-1) solid var(--color-border-default); border-radius: var(--radius-lg); background-color: var(--color-bg-raised); }
+.cardTitle { margin: 0; font-size: var(--font-size-h4); color: var(--color-text-strong); }
+.cardDesc { margin: 0; }
+.confidenceBox { padding: var(--space-5); border: var(--border-w-1) solid var(--color-border-default); border-radius: var(--radius-lg); background-color: var(--color-bg-raised); }
+.ctaTitle { margin: 0; color: var(--color-dark-text-strong); }
+.ctaBody { color: var(--color-dark-text-default); max-width: 52ch; }
+.ctaActions { display: flex; flex-wrap: wrap; gap: var(--space-3); }

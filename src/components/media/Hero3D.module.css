@@ -1,0 +1,66 @@
+.hero {
+  /* The hero is always a background layer: it fills its nearest positioned
+     ancestor, which owns the height. That keeps the hero's size driven by real
+     content rather than by an arbitrary aspect ratio, so it can never overflow
+     on a small screen. */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-brand-navy-950);
+  overflow: hidden;
+  /* Keeps the compositing of the canvas over the static fallback contained. */
+  isolation: isolate;
+}
+
+.canvasLayer {
+  position: absolute;
+  inset: 0;
+  /* Above the static fallback, below the scrim. */
+  z-index: 1;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* The crossfade itself is done in the shader's alpha channel, so there is no
+     CSS animation to disable here and nothing flashes before the first frame. */
+  pointer-events: none;
+}
+
+/* Legibility scrim — deliberately the top layer of the hero art.
+ *
+ * The shader's centre glow is the brightest thing on the page, and the canvas
+ * paints OVER the fallback's own vignette, so before this layer existed nothing
+ * darkened the 3D render behind the heading and the amber eyebrow measured
+ * 4.61:1 against the brightest pixel. This is a measured fix, not a decorative
+ * overlay.
+ *
+ * Weight is asymmetric on purpose: the hero text is left-aligned, so the strong
+ * end sits on the left. It is kept moderate rather than heavy because the amber
+ * end of the ribbon is also on the left — a dense scrim would buy contrast by
+ * burying the primary brand colour. Both stops are the approved MAP Navy at low
+ * alpha; no new colour is introduced. */
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      100deg,
+      rgb(4 6 15 / 0.46) 0%,
+      rgb(4 6 15 / 0.28) 32%,
+      rgb(4 6 15 / 0.04) 60%,
+      rgb(4 6 15 / 0) 100%
+    ),
+    radial-gradient(
+      125% 95% at 50% 46%,
+      transparent 0%,
+      rgb(4 6 15 / 0.3) 62%,
+      rgb(4 6 15 / 0.72) 100%
+    );
+}

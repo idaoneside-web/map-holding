@@ -1,0 +1,95 @@
+.toggle {
+  display: inline-flex;
+}
+
+/* The drawer is only meaningful below the desktop breakpoint. */
+@media (min-width: 1024px) {
+  .toggle {
+    display: none;
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background-color: var(--color-brand-navy-950);
+  /* A restrained navy ground, not a glass panel: the brand uses solid grounds
+     and a lot of them is what keeps this from reading as a SaaS dashboard. */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  animation: drawerIn var(--motion-duration-base) var(--motion-ease-entrance);
+}
+
+@keyframes drawerIn {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--motion-distance-md) * -1));
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding: var(--space-5) var(--gutter) var(--space-8);
+}
+
+/* The panel is a focus *container*, not a control: it takes programmatic focus
+   so the dialog is announced, but a ring around the whole panel would be noise.
+   Every control inside keeps its normal visible focus ring. */
+.panel:focus {
+  outline: none;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  margin-bottom: var(--space-6);
+}
+
+.nav {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: var(--border-w-1) solid var(--color-border-default);
+}
+
+.note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0;
+  font-size: var(--font-size-caption);
+  line-height: var(--font-line-height-caption);
+  color: var(--color-text-muted);
+}
+
+.note span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}

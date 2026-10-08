@@ -1,0 +1,22 @@
+.reveal {
+  opacity: 0;
+  transform: translateY(var(--motion-distance-lg));
+  transition:
+    opacity var(--motion-duration-reveal) var(--motion-ease-entrance),
+    transform var(--motion-duration-reveal) var(--motion-ease-entrance);
+  will-change: opacity, transform;
+}
+
+.shown {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hard requirement: reduced motion shows content instantly, no transform. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+}

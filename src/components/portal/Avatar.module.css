@@ -1,0 +1,26 @@
+.avatar {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  padding: 1px;
+  /* The logo's own amber → blue → teal progression, as a hairline ring. */
+  background-image: var(--gradient-rule);
+  color: var(--color-dark-text-strong);
+}
+
+.inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-full);
+  background-color: var(--color-brand-navy-800);
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.02em;
+  color: var(--color-brand-gold-300);
+}

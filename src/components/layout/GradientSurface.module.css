@@ -1,0 +1,48 @@
+.surface {
+  position: relative;
+  isolation: isolate;
+}
+
+.padded {
+  padding: var(--space-6);
+}
+
+.radius-none {
+  border-radius: 0;
+}
+.radius-sm {
+  border-radius: var(--radius-sm);
+}
+.radius-md {
+  border-radius: var(--radius-md);
+}
+.radius-lg {
+  border-radius: var(--radius-lg);
+}
+.radius-xl {
+  border-radius: var(--radius-xl);
+}
+
+.brand {
+  background-image: var(--gradient-brand);
+  color: var(--color-brand-ink-900);
+}
+
+.warm {
+  background-image: var(--gradient-warm);
+  color: var(--color-brand-ink-900);
+}
+
+.cool {
+  background-image: var(--gradient-cool);
+  color: var(--color-neutral-0);
+}
+
+.navy {
+  background-image: var(--gradient-navy);
+  color: var(--color-dark-text-strong);
+}
+
+.ivory {
+  background-image: var(--gradient-ivory);
+}

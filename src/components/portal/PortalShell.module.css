@@ -1,0 +1,166 @@
+/* ==========================================================================
+   PortalShell — the authenticated client environment.
+   Token-driven only. No raw colour, no raw type value.
+   ========================================================================== */
+
+.shell {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--portal-rail) minmax(0, 1fr);
+  min-height: 100dvh;
+  color: var(--color-dark-text-strong);
+
+  /* --- Dark-theme token re-pointing (mirrors Section's dark tones) --------
+     This is what lets every nested primitive — Text, Badge, StatusBadge,
+     Button, ContentPlaceholder — render correctly on the navy ground without a
+     per-component dark variant. */
+  --color-bg-default: var(--color-dark-bg-default);
+  --color-bg-raised: var(--color-dark-bg-raised);
+  --color-bg-subtle: var(--color-dark-bg-raised);
+  --color-text-strong: var(--color-dark-text-strong);
+  --color-text-default: var(--color-dark-text-default);
+  --color-text-muted: var(--color-dark-text-muted);
+  --color-border-default: var(--color-dark-border-default);
+  --color-border-light: var(--color-dark-border-default);
+  --color-accent: var(--color-brand-blue-300);
+  --color-accent-gold: var(--color-brand-gold-300);
+
+  --portal-rail: 17.5rem;
+
+  background-color: var(--color-brand-navy-950);
+
+  /* --- Atmos: a quiet, purely decorative ground --------------------------
+     Two very low-opacity brand glows over a navy field. CSS only — no WebGL,
+     no per-page animation. The `.shell::before` layer is fixed so the ground
+     stays still as the page scrolls, keeping the environment calm. */
+  background-image:
+    radial-gradient(60rem 40rem at 12% -10%, rgb(243 150 57 / 0.1), transparent 60%),
+    radial-gradient(50rem 36rem at 100% 0%, rgb(0 59 163 / 0.14), transparent 55%);
+  background-attachment: fixed, fixed;
+}
+
+/* --- Rail ---------------------------------------------------------------- */
+
+.rail {
+  grid-column: 1;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+  height: 100dvh;
+  padding: var(--space-6) var(--space-4) var(--space-5);
+  overflow-y: auto;
+  border-right: var(--border-w-hair) solid var(--color-dark-border-default);
+  background-color: color-mix(in srgb, var(--color-brand-navy-950) 55%, transparent);
+  backdrop-filter: blur(6px);
+}
+
+.railBrand {
+  padding: var(--space-2) var(--space-3) 0;
+}
+
+.brandLink {
+  display: inline-block;
+  border-radius: var(--radius-xs);
+}
+
+.railNav {
+  flex: 1 1 auto;
+}
+
+.railFoot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-top: var(--space-5);
+  border-top: var(--border-w-hair) solid var(--color-dark-border-default);
+}
+
+/* The way back to the public site: the portal is one part of one website, never
+   a dead end. */
+.publicLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  font-size: var(--font-size-body-s);
+  color: var(--color-dark-text-muted);
+  text-decoration: none;
+  transition: color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.publicLink:hover {
+  color: var(--color-dark-text-strong);
+}
+
+/* --- Content column ------------------------------------------------------ */
+
+.content {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* A slim, honest environment banner. Not a marketing ribbon: a caption. */
+.preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0;
+  padding: var(--space-3) var(--gutter);
+  border-bottom: var(--border-w-hair) solid var(--color-dark-border-default);
+  background-color: color-mix(in srgb, var(--color-brand-navy-950) 45%, transparent);
+}
+
+.previewText {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--gutter);
+  border-bottom: var(--border-w-hair) solid var(--color-dark-border-default);
+}
+
+.topbarBrand {
+  display: inline-block;
+  border-radius: var(--radius-xs);
+}
+
+.main {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-block: var(--space-8) var(--space-10);
+}
+
+/* --- Responsive ---------------------------------------------------------- */
+
+/* The rail only appears once there is room for it. Below this the drawer takes
+   over and the top bar carries the brand — the desktop rail is never squeezed. */
+@media (min-width: 1024px) {
+  .topbar {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rail {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .shell {
+    --portal-rail: 18.5rem;
+  }
+}

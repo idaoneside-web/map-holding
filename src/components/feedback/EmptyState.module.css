@@ -1,0 +1,36 @@
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-8) var(--space-5);
+  text-align: center;
+  border: var(--border-w-1) dashed var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background-color: color-mix(in srgb, var(--color-bg-raised) 60%, transparent);
+  min-width: 0;
+}
+
+.glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: var(--space-1);
+  border-radius: var(--radius-full);
+  border: var(--border-w-1) solid var(--color-border-default);
+  color: var(--color-text-muted);
+}
+
+.title {
+  margin: 0;
+}
+
+.body {
+  max-width: 52ch;
+}
+
+.action {
+  margin-top: var(--space-2);
+}

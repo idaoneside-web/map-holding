@@ -1,0 +1,41 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-min, 18rem), 100%), 1fr));
+  min-width: 0;
+}
+
+.grid > * {
+  min-width: 0;
+}
+
+.gap-sm {
+  gap: var(--grid-gap-sm);
+}
+
+.gap-md {
+  gap: var(--grid-gap);
+}
+
+.gap-lg {
+  gap: var(--space-7);
+}
+
+/* Explicit column counts above the `lg` breakpoint only, so the auto-fit
+   reflow still governs tablet and mobile. */
+@media (min-width: 1024px) {
+  .cols-1 {
+    grid-template-columns: 1fr;
+  }
+
+  .cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

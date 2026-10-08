@@ -1,0 +1,121 @@
+/* ==========================================================================
+   MAP HOLDING — COLOR TOKENS
+   Authority: MAP Holding Brand Identity Board.png
+   [sampled] = extracted by pixel analysis of the board (see docs/BRAND-GUIDELINES.md)
+   [derived] = a system step built from a sampled anchor (never an arbitrary hue)
+   ========================================================================== */
+
+:root {
+  /* --- Brand: MAP Gold / ribbon amber ------------------------------------ */
+  --color-brand-gold-300: #f7dfa0; /* [sampled] ribbon highlight            */
+  --color-brand-gold-400: #f2b364; /* [sampled] ribbon upper lobe           */
+  --color-brand-gold-500: #f39639; /* [sampled] MAP Gold — ribbon amber     */
+  --color-brand-gold-600: #b06520; /* [sampled] ribbon shadow side          */
+  --color-brand-gold-700: #763915; /* [sampled] ribbon deepest              */
+
+  /* --- Brand: MAP metallic gold (wordmark + gold app tile) --------------- */
+  --color-brand-metal-300: #e8d3aa; /* [sampled] wordmark median            */
+  --color-brand-metal-500: #d1a660; /* [sampled] gold app-tile median       */
+  --color-brand-metal-700: #b07f40; /* [sampled] tile / wordmark dark       */
+
+  /* --- Brand: MAP Blue (ribbon centre) ---------------------------------- */
+  --color-brand-blue-300: #6fa8ee; /* [derived] light step                   */
+  --color-brand-blue-400: #1f74da; /* [sampled] ribbon bright blue (links)   */
+  --color-brand-blue-500: #003ba3; /* [sampled] MAP Blue — ribbon median     */
+  --color-brand-blue-600: #06308c; /* [sampled] ribbon shadow side           */
+  --color-brand-blue-700: #00186e; /* [sampled] ribbon deepest               */
+
+  /* --- Brand: MAP Teal (ribbon right) ----------------------------------- */
+  --color-brand-teal-300: #7fe7d2; /* [derived] light step                   */
+  --color-brand-teal-400: #2fd8b8; /* [sampled] ribbon teal tip              */
+  --color-brand-teal-500: #0092ba; /* [sampled] MAP Teal — ribbon median     */
+  --color-brand-teal-700: #0a6e7b; /* [derived] deep; 5.9:1 on ivory-50      */
+
+  /* --- Grounds ----------------------------------------------------------- */
+  --color-brand-navy-950: #04060f; /* [sampled] board vignette floor         */
+  --color-brand-navy-900: #080b1e; /* [sampled] MAP Navy — board ground      */
+  --color-brand-navy-800: #111931; /* [derived] raised surface on dark       */
+  --color-brand-ivory-50: #faf8f4; /* [sampled] light ground                 */
+  --color-brand-ivory-100: #efebe2; /* [derived] shade on ivory              */
+  --color-brand-ink-900: #0b0f19; /* [sampled] wordmark ink on light        */
+
+  /* --- Neutral / functional ramp (Phase 1 §A.2 — not logo-derived) ------- */
+  --color-neutral-0: #ffffff;
+  --color-neutral-100: #f2f3f5;
+  --color-neutral-300: #d7dbe0;
+  --color-neutral-500: #8a929c;
+  --color-neutral-700: #3c444f;
+  --color-neutral-850: #1c2430;
+  --color-neutral-900: #0f141b;
+
+  /* --- Semantic / status -------------------------------------------------
+     Brand-native wherever the identity provides a hue. `success` is MAP Teal,
+     `info` is the ribbon blue, `warning`/`pending` are MAP Gold. Only `danger`
+     introduces a hue the logo does not contain (functional necessity).       */
+  --color-semantic-success: var(--color-brand-teal-500);
+  --color-semantic-success-deep: var(--color-brand-teal-700);
+  --color-semantic-info: var(--color-brand-blue-400);
+  --color-semantic-info-deep: var(--color-brand-blue-700);
+  --color-semantic-warning: var(--color-brand-gold-500);
+  --color-semantic-warning-deep: var(--color-brand-gold-600);
+  --color-semantic-danger: #c0392b;
+  --color-semantic-danger-deep: #8e2a20;
+  --color-semantic-pending: var(--color-brand-gold-500);
+
+  /* --- Semantic aliases: light surface set ------------------------------- */
+  --color-bg-default: var(--color-brand-ivory-50);
+  --color-bg-raised: var(--color-neutral-0);
+  --color-bg-subtle: var(--color-brand-ivory-100);
+  --color-text-strong: var(--color-brand-ink-900);
+  --color-text-default: var(--color-neutral-700);
+  --color-text-muted: var(--color-neutral-500);
+  --color-border-default: var(--color-neutral-300);
+  --color-focus-ring: var(--color-brand-blue-400);
+
+  /* --- Tone-adaptive accents (re-pointed by Section on dark grounds) ----- */
+  --color-accent: var(--color-brand-blue-500);
+  --color-accent-gold: var(--color-brand-gold-600);
+
+  /* --- Semantic aliases: dark surface set -------------------------------- */
+  --color-dark-bg-default: var(--color-brand-navy-900);
+  --color-dark-bg-deep: var(--color-brand-navy-950);
+  --color-dark-bg-raised: var(--color-brand-navy-800);
+  --color-dark-text-strong: var(--color-brand-ivory-50);
+  --color-dark-text-default: color-mix(in srgb, var(--color-brand-ivory-50) 78%, transparent);
+  --color-dark-text-muted: color-mix(in srgb, var(--color-brand-ivory-50) 58%, transparent);
+  --color-dark-border-default: var(--color-neutral-850);
+
+  /* --- Brand gradients (Phase 1 §A.4 — logo-derived order only) ---------- */
+  --gradient-brand: linear-gradient(
+    135deg,
+    var(--color-brand-gold-300) 0%,
+    var(--color-brand-blue-500) 52%,
+    var(--color-brand-teal-500) 100%
+  );
+  --gradient-warm: linear-gradient(
+    135deg,
+    var(--color-brand-gold-300),
+    var(--color-brand-gold-500)
+  );
+  --gradient-cool: linear-gradient(
+    135deg,
+    var(--color-brand-blue-500),
+    var(--color-brand-teal-500)
+  );
+  --gradient-navy: linear-gradient(
+    180deg,
+    var(--color-brand-navy-900),
+    var(--color-brand-navy-950)
+  );
+  --gradient-ivory: linear-gradient(
+    180deg,
+    var(--color-brand-ivory-50),
+    var(--color-brand-ivory-100)
+  );
+  --gradient-rule: linear-gradient(
+    90deg,
+    var(--color-brand-gold-500),
+    var(--color-brand-blue-500) 55%,
+    var(--color-brand-teal-500)
+  );
+}

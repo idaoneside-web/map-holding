@@ -1,0 +1,86 @@
+/* The toggle only exists below the desktop breakpoint; the rail takes over above it. */
+.toggle {
+  display: inline-flex;
+}
+
+@media (min-width: 1024px) {
+  .toggle {
+    display: none;
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  justify-content: flex-end;
+  background-color: color-mix(in srgb, var(--color-brand-navy-950) 72%, transparent);
+  backdrop-filter: blur(2px);
+  animation: fade var(--motion-duration-base) var(--motion-ease-entrance);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  width: min(26rem, 90vw);
+  height: 100dvh;
+  padding: var(--space-5);
+  overflow-y: auto;
+  color: var(--color-dark-text-strong);
+  background-color: var(--color-brand-navy-950);
+  border-left: var(--border-w-1) solid var(--color-dark-border-default);
+  animation: slide var(--motion-duration-base) var(--motion-ease-entrance);
+}
+
+.panel:focus {
+  outline: none;
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: auto;
+  padding-top: var(--space-5);
+  border-top: var(--border-w-hair) solid var(--color-dark-border-default);
+}
+
+.publicLink {
+  font-size: var(--font-size-body-s);
+  color: var(--color-dark-text-muted);
+  text-decoration: none;
+}
+
+.publicLink:hover {
+  color: var(--color-dark-text-strong);
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(var(--motion-distance-lg));
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

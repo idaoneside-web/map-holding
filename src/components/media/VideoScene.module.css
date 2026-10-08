@@ -1,0 +1,23 @@
+/* Full-bleed chapter clip; sits behind the chapter's legibility scrim. */
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+/* Brand grade over the clip so every chapter stays inside the MAP navy /
+   gold / blue / teal world rather than reading as raw stock footage. */
+.video::after {
+  content: "";
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video {
+    /* Not autoplaying, so the poster frame remains — no motion. */
+    will-change: auto;
+  }
+}

@@ -1,0 +1,14 @@
+/* The shell is a column so a short page still pushes the footer to the bottom
+   of the viewport rather than leaving it floating mid-screen. */
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.main {
+  /* Grows to absorb any leftover height; `min-width: 0` keeps long content from
+     widening the document (the Phase 2 overflow rule). */
+  flex: 1 1 auto;
+  min-width: 0;
+}

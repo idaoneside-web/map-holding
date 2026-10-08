@@ -1,0 +1,80 @@
+.placeholder {
+  border: var(--border-w-1) dashed color-mix(in srgb, var(--color-brand-gold-500) 55%, transparent);
+  border-radius: var(--radius-md);
+  background-color: color-mix(in srgb, var(--color-brand-gold-500) 7%, transparent);
+  min-width: 0;
+}
+
+.inline {
+  padding: var(--space-4);
+}
+
+.panel {
+  padding: var(--space-5);
+}
+
+.marker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin: 0;
+  min-width: 0;
+}
+
+/* A small, quiet marker word — deliberately not shouting, just unambiguous. */
+.pill {
+  flex: none;
+  padding: 1px var(--space-2);
+  border-radius: var(--radius-xs);
+  border: var(--border-w-1) solid color-mix(in srgb, var(--color-text-strong) 22%, transparent);
+  font-size: var(--font-size-eyebrow);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--font-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-text-default);
+}
+
+.label {
+  font-size: var(--font-size-body-s);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-strong);
+  overflow-wrap: anywhere;
+}
+
+.detail {
+  margin: var(--space-2) 0 0;
+  font-size: var(--font-size-body-s);
+  line-height: var(--font-line-height-body-s);
+  color: var(--color-text-default);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-size: var(--font-size-body-s);
+  line-height: var(--font-line-height-body-s);
+  color: var(--color-text-default);
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+/* A hollow square reads as "to be filled in" without being a checkbox. */
+.itemMark {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-top: 0.4em;
+  border: var(--border-w-1) solid color-mix(in srgb, var(--color-text-strong) 40%, transparent);
+  border-radius: 1px;
+}

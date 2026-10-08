@@ -1,0 +1,59 @@
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-5);
+  min-width: 0;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 62ch;
+  min-width: 0;
+}
+
+.eyebrow {
+  margin-bottom: var(--space-1);
+}
+
+/* The logo's own amber -> blue -> teal progression, used as a hairline.
+   Restrained: 56px wide, 2px tall. */
+.rule {
+  display: block;
+  width: 56px;
+  height: 2px;
+  border-radius: var(--radius-full);
+  background-image: var(--gradient-rule);
+}
+
+.title {
+  margin-top: var(--space-1);
+}
+
+.lead {
+  max-width: 58ch;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.align-center {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.align-center .text {
+  align-items: center;
+}
+
+.align-center .rule {
+  align-self: center;
+}

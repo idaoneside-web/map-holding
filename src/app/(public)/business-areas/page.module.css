@@ -1,0 +1,15 @@
+.heroInner { padding-block: var(--space-10); }
+.lead { max-width: 56ch; }
+
+.areaHeader { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-4); }
+.areaTitle { margin: 0; font-size: var(--font-size-h2); color: var(--color-text-strong); }
+.tags { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.areaBody { display: flex; flex-direction: column; gap: var(--space-4); }
+.bodyText { max-width: 64ch; margin: 0; }
+.detailList { display: flex; flex-direction: column; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+.detailItem { display: flex; align-items: flex-start; gap: var(--space-3); font-size: var(--font-size-body); color: var(--color-text-default); }
+.detailItem::before { content: "—"; color: var(--color-brand-gold-500); flex: none; }
+
+.ctaTitle { margin: 0; color: var(--color-dark-text-strong); }
+.ctaBody { color: var(--color-dark-text-default); max-width: 52ch; }
+.ctaActions { display: flex; flex-wrap: wrap; gap: var(--space-3); }

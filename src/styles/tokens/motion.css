@@ -1,0 +1,38 @@
+/* ==========================================================================
+   MAP HOLDING — MOTION TOKENS  (Phase 1 §I — premium, restrained)
+   ========================================================================== */
+
+:root {
+  /* --- Duration ---------------------------------------------------------- */
+  --motion-duration-fast: 150ms;
+  --motion-duration-base: 240ms;
+  --motion-duration-slow: 420ms;
+  --motion-duration-reveal: 700ms;
+
+  /* --- Easing ------------------------------------------------------------ */
+  --motion-ease-standard: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --motion-ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+
+  /* --- Distance --------------------------------------------------------- */
+  --motion-distance-sm: 4px;
+  --motion-distance-md: 12px;
+  --motion-distance-lg: 24px;
+  --motion-stagger: 80ms; /* max stagger between revealed siblings */
+}
+
+/* Reduced motion is a hard requirement, not optional (Phase 1 §I / §L).
+   Transforms and parallax are disabled and durations collapse to ~0 so
+   content appears instantly. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-fast: 0.01ms;
+    --motion-duration-base: 0.01ms;
+    --motion-duration-slow: 0.01ms;
+    --motion-duration-reveal: 0.01ms;
+    --motion-distance-sm: 0;
+    --motion-distance-md: 0;
+    --motion-distance-lg: 0;
+    --motion-stagger: 0ms;
+  }
+}

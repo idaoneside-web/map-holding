@@ -1,0 +1,45 @@
+.link {
+  color: var(--color-accent);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  transition:
+    color var(--motion-duration-fast) var(--motion-ease-standard),
+    text-decoration-color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.link:hover {
+  color: var(--color-accent-gold);
+  text-decoration-color: currentColor;
+}
+
+.subtle {
+  color: var(--color-text-default);
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+
+.standalone {
+  font-weight: var(--font-weight-medium);
+}
+
+.nav {
+  color: var(--color-text-strong);
+  text-decoration: none;
+  font-size: var(--font-size-nav);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--font-tracking-nav);
+}
+
+.nav:hover {
+  color: var(--color-accent-gold);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

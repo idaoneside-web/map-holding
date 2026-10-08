@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MAP HOLDING — Brand System Live Preview</title>
+<meta name="description" content="Live preview of the MAP Holding brand system derived from the identity board." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   TOKENS — values taken verbatim from docs/PHASE-1-ARCHITECTURE.md
+   Sections A (palette), B (type), C (tokens)
+   ============================================================ */
+:root{
+  /* A.1 core brand ramps */
+  --gold-300:#F3C56B; --gold-400:#E8862B; --gold-500:#D99A3C;
+  --gold-600:#B4761F;
+  --blue-400:#2E6BE0; --blue-500:#1E4FB0; --blue-700:#143174;
+  --teal-400:#37D3C6; --teal-500:#18B4AE;
+  --navy-950:#070C1E; --navy-900:#0A1026; --navy-800:#101A38;
+  --ivory-50:#F7F2E7; --ivory-100:#EFE7D6;
+  --ink-900:#111418;
+  /* A.2 neutral ramp */
+  --neutral-0:#FFFFFF; --neutral-100:#F2F3F5; --neutral-300:#D7DBE0;
+  --neutral-500:#8A929C; --neutral-700:#3C444F; --neutral-850:#1C2430;
+  --neutral-900:#0F141B;
+  /* A.3 semantic */
+  --success:var(--teal-500); --info:var(--blue-400);
+  --warning:var(--gold-400); --danger:#C0392B; --pending:var(--gold-500);
+  /* A.4 gradients */
+  --grad-brand:linear-gradient(135deg,var(--gold-300),var(--blue-500),var(--teal-500));
+  --grad-warm:linear-gradient(135deg,var(--gold-300),var(--gold-500));
+  --grad-cool:linear-gradient(135deg,var(--blue-500),var(--teal-500));
+  --grad-navy:linear-gradient(180deg,var(--navy-900),var(--navy-950));
+  --grad-ivory:linear-gradient(180deg,var(--ivory-50),var(--ivory-100));
+  /* B typography */
+  --font-display:"Sora",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  /* C.3 spacing */
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px;
+  --space-5:24px; --space-6:32px; --space-7:48px; --space-8:64px;
+  --space-9:96px; --space-10:128px; --space-11:160px;
+  /* C.4 radius */
+  --radius-xs:4px; --radius-sm:6px; --radius-md:10px; --radius-lg:16px;
+  --radius-xl:24px; --radius-full:9999px;
+  /* C.5 shadows */
+  --shadow-1:0 1px 2px rgba(10,16,38,.06);
+  --shadow-2:0 4px 16px rgba(10,16,38,.08);
+  --shadow-3:0 12px 32px rgba(10,16,38,.12);
+  --shadow-gold:0 8px 28px rgba(217,154,60,.28);
+  /* C.6 borders */
+  --border-w-hair:.5px; --border-w-1:1px; --border-w-2:2px;
+  /* C.7 motion */
+  --duration-fast:150ms; --duration-base:240ms; --duration-slow:420ms; --duration-reveal:700ms;
+  --ease-standard:cubic-bezier(.2,.6,.2,1);
+  --ease-entrance:cubic-bezier(.16,1,.3,1);
+  --ease-exit:cubic-bezier(.4,0,1,1);
+  /* C.8 layout */
+  --container-max:1280px; --container-narrow:880px; --container-portal:1440px;
+  --gutter:clamp(16px,4vw,40px);
+}
+
+
+/* ============================================================ BASE */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--ivory-50); color:var(--ink-900);
+  font-family:var(--font-body); font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+h1,h2,h3,h4{font-family:var(--font-display); margin:0; font-weight:600}
+p{margin:0}
+a{color:var(--blue-500); text-decoration:none}
+a:hover{text-decoration:underline}
+img{max-width:100%; display:block}
+:focus-visible{outline:2px solid var(--blue-400); outline-offset:2px; border-radius:var(--radius-xs)}
+.container{width:100%; max-width:var(--container-max); margin-inline:auto; padding-inline:var(--gutter)}
+.narrow{max-width:var(--container-narrow)}
+.section{padding-block:clamp(48px,7vw,96px)}
+.section + .section{border-top:1px solid var(--neutral-300)}
+.section-head{margin-bottom:var(--space-7)}
+.section-head .eyebrow{display:block; margin-bottom:var(--space-3)}
+.section-head h2{font-size:clamp(26px,3.2vw,36px); line-height:1.15; letter-spacing:-.01em}
+.section-head p{color:var(--neutral-700); margin-top:var(--space-3); max-width:62ch}
+.eyebrow{
+  font-family:var(--font-body); font-size:12px; font-weight:600;
+  letter-spacing:.18em; text-transform:uppercase; line-height:1.3; color:var(--gold-600);
+}
+.display-xl{font-size:clamp(40px,6vw,72px); line-height:1.05; letter-spacing:-.02em}
+.display-l{font-size:clamp(34px,4.6vw,56px); line-height:1.08; letter-spacing:-.02em}
+.h1{font-size:clamp(30px,3.9vw,48px); line-height:1.10; letter-spacing:-.015em}
+.h2{font-size:clamp(26px,3.2vw,36px); line-height:1.15; letter-spacing:-.01em}
+.h3{font-size:clamp(21px,2.4vw,28px); line-height:1.20; letter-spacing:-.005em}
+.h4{font-size:clamp(18px,1.9vw,22px); line-height:1.25}
+.body-l{font-size:clamp(17px,1.5vw,18px); line-height:1.6}
+.body{font-size:16px; line-height:1.6}
+.body-s{font-size:14px; line-height:1.55}
+.caption{font-size:12px; font-weight:500; line-height:1.4; letter-spacing:.02em}
+.metric{font-family:var(--font-display); font-size:clamp(26px,3vw,32px); font-weight:600; line-height:1.05; letter-spacing:-.01em; font-variant-numeric:tabular-nums}
+
+/* ============================================================ TOP BAR */
+.topbar{
+  position:sticky; top:0; z-index:50; background:rgba(10,16,38,.92);
+  backdrop-filter:blur(12px); border-bottom:var(--border-w-1) solid rgba(247,242,231,.12);
+}
+.topbar .inner{display:flex; align-items:center; gap:var(--space-5); height:68px}
+.mark{display:flex; align-items:center; gap:var(--space-3); text-decoration:none}
+.mark:hover{text-decoration:none}
+.mark .glyph{width:38px; height:38px; border-radius:var(--radius-sm); box-shadow:var(--shadow-2)}
+.mark .word{display:flex; flex-direction:column; line-height:1}
+.mark .word b{
+  font-family:var(--font-display); font-weight:700; font-size:18px; letter-spacing:.22em;
+  background:var(--grad-warm); -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.mark .word span{font-size:9px; letter-spacing:.24em; color:var(--gold-300); margin-top:4px}
+.topnav{display:flex; gap:var(--space-5); margin-left:auto; align-items:center}
+.topnav a{
+  font-size:15px; font-weight:500; color:rgba(247,242,231,.78); letter-spacing:.01em;
+  transition:color var(--duration-fast) var(--ease-standard);
+}
+.topnav a:hover,.topnav a[aria-current]{color:var(--gold-300); text-decoration:none}
+.pill{
+  border:var(--border-w-1) solid rgba(243,197,107,.45); color:var(--gold-300);
+  padding:8px 16px; border-radius:var(--radius-full); font-size:13px; font-weight:600;
+  transition:background var(--duration-base) var(--ease-standard),color var(--duration-base) var(--ease-standard);
+}
+.pill:hover{background:var(--gold-500); color:var(--navy-900); text-decoration:none}
+
+/* ============================================================ HERO */
+.hero{background:var(--grad-navy); color:var(--ivory-50); position:relative; overflow:hidden}
+.hero::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(70% 60% at 78% 18%,rgba(217,154,60,.20),transparent 62%),
+             radial-gradient(60% 55% at 12% 88%,rgba(24,180,174,.18),transparent 60%);
+}
+.hero .inner{position:relative; z-index:1; padding-block:clamp(64px,9vw,128px)}
+.hero .rule{height:3px; width:88px; background:var(--grad-brand); border-radius:var(--radius-full); margin-bottom:var(--space-6)}
+.hero h1{max-width:18ch; color:#fff}
+.hero h1 em{
+  font-style:normal;
+  background:var(--grad-warm); -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.hero p.lead{color:rgba(247,242,231,.80); margin-top:var(--space-5); max-width:60ch}
+.hero .actions{display:flex; flex-wrap:wrap; gap:var(--space-4); margin-top:var(--space-7)}
+.pillars{display:flex; flex-wrap:wrap; gap:var(--space-3); margin-top:var(--space-8)}
+.pillars span{
+  font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--gold-300); border:var(--border-w-1) solid rgba(243,197,107,.3);
+  padding:7px 14px; border-radius:var(--radius-full);
+}
+
+/* ============================================================ SWATCHES */
+.grid-swatches{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:var(--space-4)}
+.swatch{border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow-2); background:#fff; border:var(--border-w-1) solid var(--neutral-300)}
+.swatch .chip{height:92px}
+.swatch .meta{padding:var(--space-3) var(--space-4)}
+.swatch .meta b{display:block; font-size:13px; font-weight:600; font-family:var(--font-display)}
+.swatch .meta code{font-size:11px; color:var(--neutral-500); letter-spacing:.02em}
+.swatch .meta small{display:block; font-size:11px; color:var(--neutral-700); margin-top:4px}
+.group-label{font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--neutral-500); margin:var(--space-7) 0 var(--space-4)}
+.group-label:first-child{margin-top:0}
+.on-dark{background:var(--navy-900); border-color:var(--neutral-850)}
+.on-dark .meta b{color:var(--ivory-50)}
+.on-dark .meta code{color:var(--neutral-500)}
+
+/* ============================================================ GRADIENTS */
+.grad-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:var(--space-4)}
+.grad{border-radius:var(--radius-lg); height:132px; display:flex; align-items:flex-end; padding:var(--space-4); box-shadow:var(--shadow-2)}
+.grad span{font-size:12px; font-weight:600; letter-spacing:.04em; color:var(--navy-900)}
+.grad.dark span{color:var(--ivory-50)}
+
+/* ============================================================ CONTRAST PAIRS */
+.pairs{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:var(--space-4)}
+.pair{border-radius:var(--radius-md); padding:var(--space-5); box-shadow:var(--shadow-1); border:var(--border-w-1) solid var(--neutral-300)}
+.pair b{font-family:var(--font-display); font-size:18px; display:block}
+.pair small{font-size:11px; letter-spacing:.06em; text-transform:uppercase; opacity:.75; display:block; margin-top:6px}
+.pair p{font-size:13px; margin-top:var(--space-3); line-height:1.5}
+
+/* ============================================================ TYPE SPECIMEN */
+.spec{display:grid; gap:var(--space-5)}
+.spec-row{display:grid; grid-template-columns:132px 1fr; gap:var(--space-5); align-items:baseline; padding-bottom:var(--space-5); border-bottom:1px dashed var(--neutral-300)}
+.spec-row:last-child{border-bottom:0; padding-bottom:0}
+.spec-row .tag{font-size:11px; font-weight:600; letter-spacing:.04em; color:var(--neutral-500); font-family:var(--font-body)}
+.spec-row .tag b{display:block; color:var(--ink-900); font-size:12px; margin-bottom:4px}
+.spec-row .demo{flex:1; min-width:0; overflow-wrap:break-word}
+.fam-demo{display:grid; gap:var(--space-5)}
+.fam{padding:var(--space-5); border-radius:var(--radius-md); background:#fff; border:var(--border-w-1) solid var(--neutral-300)}
+.fam .lbl{font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--neutral-500)}
+
+/* ============================================================ TOKEN SCALES */
+.token-row{display:grid; grid-template-columns:120px 1fr; gap:var(--space-4); align-items:center; margin-bottom:var(--space-3)}
+.token-row .tname{font-size:12px; color:var(--neutral-700); font-family:var(--font-body)}
+.bar{background:var(--grad-cool); height:14px; border-radius:var(--radius-xs); opacity:.9}
+.radius-demo{display:flex; gap:var(--space-4); flex-wrap:wrap}
+.radius-demo div{width:88px; height:72px; background:#fff; border:var(--border-w-1) solid var(--neutral-300); display:grid; place-items:center; font-size:11px; color:var(--neutral-700)}
+.shadow-demo{display:flex; gap:var(--space-6); flex-wrap:wrap; padding:var(--space-6) 0}
+.shadow-demo div{width:150px; height:88px; border-radius:var(--radius-md); background:#fff; display:grid; place-items:center; font-size:11px; color:var(--neutral-700)}
+
+
+/* ============================================================ BUTTONS */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font-family:var(--font-body); font-size:15px; font-weight:600; letter-spacing:.01em;
+  padding:13px 26px; border-radius:var(--radius-sm); border:var(--border-w-1) solid transparent;
+  cursor:pointer; text-decoration:none; min-height:44px;
+  transition:transform var(--duration-base) var(--ease-standard),box-shadow var(--duration-base) var(--ease-standard),
+             background-color var(--duration-base) var(--ease-standard),color var(--duration-base) var(--ease-standard),
+             border-color var(--duration-base) var(--ease-standard);
+}
+.btn:hover{text-decoration:none; transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn-primary{background:var(--gold-500); color:var(--navy-900)}
+.btn-primary:hover{background:var(--gold-400); box-shadow:var(--shadow-gold)}
+.btn-primary:active{background:var(--gold-600)}
+.btn-secondary{background:transparent; border-color:rgba(247,242,231,.35); color:var(--ivory-50)}
+.btn-secondary:hover{border-color:var(--gold-300); color:var(--gold-300)}
+.btn-outline{background:transparent; border-color:var(--blue-500); color:var(--blue-500)}
+.btn-outline:hover{background:var(--blue-500); color:#fff}
+.btn-ghost{background:transparent; color:var(--blue-500); padding-inline:12px}
+.btn-ghost:hover{background:rgba(30,79,176,.08)}
+.btn-link{background:none; border:0; color:var(--blue-500); padding:0; min-height:auto; text-decoration:underline}
+.btn-gradient{background:var(--grad-brand); color:var(--navy-900)}
+.btn:disabled,.btn[aria-disabled="true"]{opacity:.45; cursor:not-allowed; transform:none; box-shadow:none}
+.btn-row{display:flex; flex-wrap:wrap; gap:var(--space-4); align-items:center}
+
+/* ============================================================ CARDS */
+.card-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:var(--space-5)}
+.card{
+  background:#fff; border-radius:var(--radius-md); border:var(--border-w-1) solid var(--neutral-300);
+  box-shadow:var(--shadow-1); overflow:hidden; display:flex; flex-direction:column;
+  transition:box-shadow var(--duration-base) var(--ease-standard),transform var(--duration-base) var(--ease-standard);
+}
+.card:hover{box-shadow:var(--shadow-2); transform:translateY(-2px)}
+.card .thumb{height:150px; background:var(--grad-cool); position:relative}
+.card .thumb.warm{background:var(--grad-warm)}
+.card .thumb.navybar{background:var(--grad-navy)}
+.card .thumb .tagbadge{position:absolute; top:12px; left:12px}
+.card .body{padding:var(--space-5); display:flex; flex-direction:column; gap:var(--space-3); flex:1}
+.card .body h3{font-size:19px}
+.card .body p{font-size:14px; color:var(--neutral-700)}
+.card .body footer{margin-top:auto; display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600; color:var(--blue-500)}
+.card-dark{background:var(--navy-800); border-color:var(--neutral-850)}
+.card-dark .body h3{color:var(--ivory-50)} .card-dark .body p{color:rgba(247,242,231,.7)}
+
+/* ============================================================ BADGES */
+.badge{
+  display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:600;
+  letter-spacing:.06em; text-transform:uppercase; padding:5px 11px; border-radius:var(--radius-full);
+}
+.badge-open{background:rgba(24,180,174,.14); color:#0E7A75; border:1px solid rgba(24,180,174,.35)}
+.badge-pending{background:rgba(217,154,60,.16); color:var(--gold-600); border:1px solid rgba(217,154,60,.35)}
+.badge-info{background:rgba(46,107,224,.13); color:var(--blue-500); border:1px solid rgba(46,107,224,.3)}
+.badge-danger{background:rgba(192,57,43,.12); color:var(--danger); border:1px solid rgba(192,57,43,.3)}
+.badge-neutral{background:var(--neutral-100); color:var(--neutral-700); border:1px solid var(--neutral-300)}
+.badge-solid-teal{background:var(--teal-500); color:#04241F}
+.dot{width:7px; height:7px; border-radius:var(--radius-full); background:currentColor; display:inline-block}
+
+/* ============================================================ FORMS */
+.form-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:var(--space-5)}
+.field{display:flex; flex-direction:column; gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-size:13px; font-weight:600; color:var(--neutral-900)}
+.field .help{font-size:12px; color:var(--neutral-500)}
+.field input,.field select,.field textarea{
+  font-family:var(--font-body); font-size:15px; padding:12px 14px; min-height:44px;
+  border:var(--border-w-1) solid var(--neutral-300); border-radius:var(--radius-xs);
+  background:#fff; color:var(--ink-900); transition:border-color var(--duration-fast) var(--ease-standard),box-shadow var(--duration-fast) var(--ease-standard);
+}
+.field textarea{min-height:96px; resize:vertical}
+.field input:hover,.field select:hover,.field textarea:hover{border-color:var(--neutral-500)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none; border-color:var(--blue-400); box-shadow:0 0 0 3px rgba(46,107,224,.18)}
+.field.err input{border-color:var(--danger); box-shadow:0 0 0 3px rgba(192,57,43,.14)}
+.field .error{font-size:12px; color:var(--danger); font-weight:500}
+.check{display:flex; align-items:center; gap:10px; font-size:14px; min-height:44px}
+.check input{width:18px; height:18px; accent-color:var(--gold-500)}
+.toggle{width:46px; height:26px; border-radius:var(--radius-full); background:var(--neutral-300); position:relative; transition:background var(--duration-base) var(--ease-standard)}
+.toggle::after{content:""; position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:var(--radius-full); background:#fff; box-shadow:var(--shadow-1); transition:transform var(--duration-base) var(--ease-standard)}
+.toggle[aria-checked="true"]{background:var(--teal-500)} .toggle[aria-checked="true"]::after{transform:translateX(20px)}
+
+
+/* ============================================================ PORTAL MOCK */
+.portal{display:grid; grid-template-columns:230px 1fr; border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-3); border:1px solid var(--neutral-850); background:var(--navy-900)}
+.portal .rail{background:var(--navy-950); padding:var(--space-5); display:flex; flex-direction:column; gap:6px}
+.portal .rail .brandline{display:flex; align-items:center; gap:10px; margin-bottom:var(--space-5)}
+.portal .rail .brandline b{font-family:var(--font-display); font-size:13px; letter-spacing:.18em; color:var(--gold-300)}
+.portal .rail .sq{width:28px; height:28px; border-radius:var(--radius-xs); background:var(--grad-brand)}
+.portal .rail a{font-size:14px; color:rgba(247,242,231,.72); padding:10px 12px; border-radius:var(--radius-sm); transition:background var(--duration-fast) var(--ease-standard),color var(--duration-fast) var(--ease-standard)}
+.portal .rail a:hover{background:rgba(247,242,231,.06); color:var(--ivory-50); text-decoration:none}
+.portal .rail a.on{background:rgba(217,154,60,.14); color:var(--gold-300); font-weight:600}
+.portal .main{padding:var(--space-6)}
+.portal .topbar2{display:flex; align-items:center; gap:var(--space-4); margin-bottom:var(--space-6)}
+.portal .topbar2 h3{color:var(--ivory-50); font-size:20px}
+.metrics{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:var(--space-4); margin-bottom:var(--space-6)}
+.metric-card{background:var(--navy-800); border:1px solid var(--neutral-850); border-radius:var(--radius-md); padding:var(--space-5)}
+.metric-card .lbl{font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--neutral-500)}
+.metric-card .val{font-family:var(--font-display); font-size:30px; font-weight:600; color:var(--gold-300); margin-top:6px; font-variant-numeric:tabular-nums}
+.metric-card .sub{font-size:12px; color:var(--teal-400); margin-top:4px}
+table.tbl{width:100%; border-collapse:collapse; font-size:14px; color:rgba(247,242,231,.86)}
+table.tbl th{text-align:left; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--neutral-500); padding:10px 12px; border-bottom:1px solid var(--neutral-850); font-weight:600}
+table.tbl td{padding:13px 12px; border-bottom:1px solid rgba(28,36,48,.7); font-variant-numeric:tabular-nums}
+table.tbl tr:last-child td{border-bottom:0}
+
+/* ============================================================ MOTION DEMO */
+.motion-row{display:flex; flex-wrap:wrap; gap:var(--space-4); align-items:center}
+.motion-row .btn{pointer-events:none}
+.reveal-demo{display:grid; gap:var(--space-3); max-width:420px}
+.reveal-demo .bar2{height:16px; border-radius:var(--radius-xs); background:var(--grad-warm); opacity:0; transform:translateY(12px); animation:rise var(--duration-reveal) var(--ease-entrance) forwards}
+.reveal-demo .bar2:nth-child(2){animation-delay:80ms}
+.reveal-demo .bar2:nth-child(3){animation-delay:160ms; background:var(--grad-cool)}
+@keyframes rise{to{opacity:1; transform:none}}
+.hover-zoom{width:180px; height:110px; border-radius:var(--radius-md); overflow:hidden; background:var(--grad-cool)}
+.hover-zoom i{display:block; width:100%; height:100%; background:var(--grad-warm); transform:scale(1); transition:transform var(--duration-slow) var(--ease-standard)}
+.hover-zoom:hover i{transform:scale(1.03)}
+
+/* ============================================================ ARCH LIST */
+.arch-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:var(--space-4)}
+.arch{background:#fff; border:var(--border-w-1) solid var(--neutral-300); border-radius:var(--radius-md); padding:var(--space-5); box-shadow:var(--shadow-1)}
+.arch b{font-family:var(--font-display); font-size:13px; letter-spacing:.1em; color:var(--gold-600); display:block; margin-bottom:8px}
+.arch h4{font-size:16px; margin-bottom:6px}
+.arch p{font-size:13px; color:var(--neutral-700)}
+
+/* ============================================================ FOOTER */
+.site-footer{background:var(--navy-900); color:rgba(247,242,231,.72); padding-block:var(--space-8) var(--space-6); margin-top:var(--space-8)}
+.site-footer .cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:var(--space-6)}
+.site-footer h5{font-family:var(--font-display); font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold-300); margin:0 0 var(--space-3)}
+.site-footer a{display:block; color:rgba(247,242,231,.72); font-size:14px; padding:5px 0}
+.site-footer a:hover{color:var(--gold-300)}
+.legalbar{border-top:1px solid rgba(247,242,231,.12); margin-top:var(--space-7); padding-top:var(--space-5); display:flex; flex-wrap:wrap; gap:var(--space-4); justify-content:space-between; font-size:12px; letter-spacing:.06em}
+
+/* ============================================================ RESPONSIVE */
+@media (max-width:900px){
+  .portal{grid-template-columns:1fr}
+  .portal .rail{flex-direction:row; overflow-x:auto; padding:var(--space-3)}
+  .portal .rail .brandline{margin-bottom:0}
+}
+@media (max-width:720px){
+  .topnav{display:none}
+  .spec-row{grid-template-columns:1fr; gap:var(--space-2)}
+  .token-row{grid-template-columns:96px 1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important}
+  .reveal-demo .bar2{opacity:1; transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container inner">
+    <a class="mark" href="#top">
+      <span class="glyph" style="background:var(--grad-warm)"></span>
+      <span class="word"><b>MAP</b><span>HOLDING</span></span>
+    </a>
+    <nav class="topnav" aria-label="Primary">
+      <a href="#palette" aria-current="page">Brand System</a>
+      <a href="#typography">Typography</a>
+      <a href="#tokens">Tokens</a>
+      <a href="#components">Components</a>
+      <a href="#portal">Portal</a>
+      <a href="#architecture">Architecture</a>
+      <a class="pill" href="#portal">Client Portal</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="container inner">
+      <div class="rule" role="presentation"></div>
+      <span class="eyebrow" style="color:var(--gold-300)">Phase 1 · Brand System Live Preview</span>
+      <h1 class="display-xl" style="margin-top:var(--space-4)">Building <em>value</em> across people, resources &amp; opportunity.</h1>
+      <p class="lead body-l">A live rendering of the MAP Holding design system derived directly from the identity board — palette, gradients, type scale, tokens, components and the client portal shell. This page consumes the exact values documented in <code>docs/PHASE-1-ARCHITECTURE.md</code>.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#palette">Explore the system</a>
+        <a class="btn btn-secondary" href="#architecture">View architecture</a>
+      </div>
+      <div class="pillars" aria-label="Brand statement">
+        <span>People</span><span>Resources</span><span>Opportunity</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="board">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Source of truth</span>
+        <h2>Derived from the identity board</h2>
+        <p>Every value on this page traces back to <strong>MAP Holding Brand Identity Board.png</strong>. The ribbon-M's amber&nbsp;→&nbsp;blue&nbsp;→&nbsp;teal journey defines the palette; navy and ivory are the grounds.</p>
+      </div>
+      <div class="arch-grid">
+        <div class="arch"><b>01</b><h4>Primary lockup (dark)</h4><p>Ribbon-M above the stacked wordmark on deep navy, gold-gradient wordmark, tracked tagline.</p></div>
+        <div class="arch"><b>02</b><h4>Primary lockup (light)</h4><p>Same mark on ivory with a near-black wordmark for light surfaces.</p></div>
+        <div class="arch"><b>03</b><h4>Horizontal lockup</h4><p>Mark left, wordmark + tagline right — nav, footer and signatures.</p></div>
+        <div class="arch"><b>04</b><h4>App-icon set</h4><p>Rounded-square tiles in navy, ivory and solid gold, plus a negative M silhouette.</p></div>
+        <div class="arch"><b>05</b><h4>Pillar strip</h4><p>PEOPLE · RESOURCES · OPPORTUNITY with cinematic imagery.</p></div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" id="palette">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Section A</span>
+        <h2>Brand palette</h2>
+        <p>Five primaries drive everything: MAP Gold, MAP Blue, MAP Teal, MAP Navy and Ivory. Component code references tokens only — never raw hex.</p>
+      </div>
+
+      <div class="group-label">Core brand ramps</div>
+      <div class="grid-swatches">
+        <div class="swatch on-dark"><div class="chip" style="background:var(--gold-300)"></div><div class="meta"><b>gold-300</b><code>#F3C56B</code><small>Amber Light · hover glow</small></div></div>
+        <div class="swatch on-dark"><div class="chip" style="background:var(--gold-400)"></div><div class="meta"><b>gold-400</b><code>#E8862B</code><small>Amber · energy accents</small></div></div>
+        <div class="swatch on-dark"><div class="chip" style="background:var(--gold-500)"></div><div class="meta"><b>gold-500</b><code>#D99A3C</code><small>MAP Gold (primary)</small></div></div>
+        <div class="swatch on-dark"><div class="chip" style="background:var(--gold-600)"></div><div class="meta"><b>gold-600</b><code>#B4761F</code><small>Gold Deep · pressed</small></div></div>
+        <div class="swatch on-dark"><div class="chip" style="background:var(--blue-400)"></div><div class="meta"><b>blue-400</b><code>#2E6BE0</code><small>Ribbon Blue Light · links</small></div></div>
+        <div class="swatch on-dark"><div class="chip" style="background:var(--blue-500)"></div><div class="meta"><b>blue-500</b><code>#1E4FB0</code><small>MAP Blue (primary)</small></div></div>
+        <div class="swatch on-dark"><div class="chip" style="background:var(--blue-700)"></div><div class="meta"><b>blue-700</b><code>#143174</code><small>Blue Deep · gradients</small></div></div>
+        <div class="swatch on-dark"><div class="chip" style="background:var(--teal-400)"></div><div class="meta"><b>teal-400</b><code>#37D3C6</code><small>Teal Light · positive</small></div></div>
+        <div class="swatch on-dark"><div class="chip" style="background:var(--teal-500)"></div><div class="meta"><b>teal-500</b><code>#18B4AE</code><small>MAP Teal (primary)</small></div></div>
+        <div class="swatch on-dark"><div class="chip" style="background:var(--navy-950)"></div><div class="meta"><b>navy-950</b><code>#070C1E</code><small>Board Navy · hero ground</small></div></div>
+        <div class="swatch on-dark"><div class="chip" style="background:var(--navy-900)"></div><div class="meta"><b>navy-900</b><code>#0A1026</code><small>MAP Navy (primary)</small></div></div>
+        <div class="swatch on-dark"><div class="chip" style="background:var(--navy-800)"></div><div class="meta"><b>navy-800</b><code>#101A38</code><small>Navy Surface · panels</small></div></div>
+        <div class="swatch on-dark"><div class="chip" style="background:var(--ivory-50)"></div><div class="meta"><b>ivory-50</b><code>#F7F2E7</code><small>Ivory · light ground</small></div></div>
+        <div class="swatch on-dark"><div class="chip" style="background:var(--ivory-100)"></div><div class="meta"><b>ivory-100</b><code>#EFE7D6</code><small>Ivory Shade · dividers</small></div></div>
+        <div class="swatch on-dark"><div class="chip" style="background:var(--ink-900)"></div><div class="meta"><b>ink-900</b><code>#111418</code><small>Wordmark Ink</small></div></div>
+      </div>
+
+      <div class="group-label">Neutral / functional ramp</div>
+      <div class="grid-swatches">
+        <div class="swatch"><div class="chip" style="background:var(--neutral-0);border-bottom:1px solid var(--neutral-300)"></div><div class="meta"><b>neutral-0</b><code>#FFFFFF</code></div></div>
+        <div class="swatch"><div class="chip" style="background:var(--neutral-100)"></div><div class="meta"><b>neutral-100</b><code>#F2F3F5</code><small>Portal background</small></div></div>
+        <div class="swatch"><div class="chip" style="background:var(--neutral-300)"></div><div class="meta"><b>neutral-300</b><code>#D7DBE0</code><small>Borders on light</small></div></div>
+        <div class="swatch"><div class="chip" style="background:var(--neutral-500)"></div><div class="meta"><b>neutral-500</b><code>#8A929C</code><small>Muted text</small></div></div>
+        <div class="swatch"><div class="chip" style="background:var(--neutral-700)"></div><div class="meta"><b>neutral-700</b><code>#3C444F</code><small>Secondary text</small></div></div>
+        <div class="swatch"><div class="chip" style="background:var(--neutral-850)"></div><div class="meta"><b>neutral-850</b><code>#1C2430</code><small>Borders on dark</small></div></div>
+        <div class="swatch"><div class="chip" style="background:var(--neutral-900)"></div><div class="meta"><b>neutral-900</b><code>#0F141B</code><small>Deep UI text</small></div></div>
+      </div>
+
+      <div class="group-label">Semantic / status</div>
+      <div class="grid-swatches">
+        <div class="swatch"><div class="chip" style="background:var(--success)"></div><div class="meta"><b>success</b><code>#18B4AE</code><small>Brand-native teal</small></div></div>
+        <div class="swatch"><div class="chip" style="background:var(--info)"></div><div class="meta"><b>info</b><code>#2E6BE0</code></div></div>
+        <div class="swatch"><div class="chip" style="background:var(--warning)"></div><div class="meta"><b>warning</b><code>#E8862B</code></div></div>
+        <div class="swatch"><div class="chip" style="background:var(--pending)"></div><div class="meta"><b>pending</b><code>#D99A3C</code></div></div>
+        <div class="swatch"><div class="chip" style="background:var(--danger)"></div><div class="meta"><b>danger</b><code>#C0392B</code><small>Functional only</small></div></div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" id="gradients">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Section A.4 · A.5</span>
+        <h2>Gradients &amp; contrast pairs</h2>
+        <p>Gradients interpolate only between brand hues, following the mark's own amber&nbsp;→&nbsp;blue&nbsp;→&nbsp;teal order or adjacent pairs. No generic purple or neon.</p>
+      </div>
+      <div class="grad-grid">
+        <div class="grad" style="background:var(--grad-brand)"><span>grad-brand · 135° gold→blue→teal</span></div>
+        <div class="grad" style="background:var(--grad-warm)"><span>grad-warm · 135° gold→gold</span></div>
+        <div class="grad dark" style="background:var(--grad-cool)"><span>grad-cool · 135° blue→teal</span></div>
+        <div class="grad dark" style="background:var(--grad-navy)"><span>grad-navy · 180° navy→navy</span></div>
+        <div class="grad" style="background:var(--grad-ivory);border:1px solid var(--neutral-300)"><span>grad-ivory · 180° ivory→ivory</span></div>
+      </div>
+
+      <div class="group-label" style="margin-top:var(--space-8)">Contrast pairs (WCAG AA target)</div>
+      <div class="pairs">
+        <div class="pair" style="background:var(--navy-900);color:var(--ivory-50)">
+          <b>Ivory on Navy</b><small style="color:var(--gold-300)">AAA body</small>
+          <p>The default dark-surface combination for hero, footer and portal chrome.</p>
+        </div>
+        <div class="pair" style="background:var(--navy-900);color:var(--gold-300)">
+          <b>Gold on Navy</b><small>AA large / headings</small>
+          <p>Brand-accent headings, eyebrows and metric values on dark.</p>
+        </div>
+        <div class="pair" style="background:var(--ivory-50);color:var(--ink-900)">
+          <b>Ink on Ivory</b><small style="color:var(--neutral-500)">AAA body</small>
+          <p>Editorial and marketing body copy on the light ground.</p>
+        </div>
+        <div class="pair" style="background:var(--ivory-50);color:var(--blue-500)">
+          <b>Blue on Ivory</b><small style="color:var(--neutral-500)">AA body</small>
+          <p>Links, headings and interactive text on light surfaces.</p>
+        </div>
+        <div class="pair" style="background:var(--gold-300);color:var(--ink-900)">
+          <b>Ink on Gold</b><small>AA buttons / icons</small>
+          <p>Primary button fill — the highest-visibility brand action.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" id="typography">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Section B</span>
+        <h2>Typography system</h2>
+        <p><strong>Sora</strong> for display and headings; <strong>Inter</strong> for body, UI and tabular data. Both open-source and self-hostable — the live page loads them from a CDN for preview only; production will self-host with no runtime CDN dependency.</p>
+      </div>
+
+      <div class="fam-demo" style="margin-bottom:var(--space-8)">
+        <div class="fam">
+          <span class="lbl">Display / Headings — Sora</span>
+          <p class="display-l" style="margin-top:var(--space-3)">PEOPLE · RESOURCES · OPPORTUNITY</p>
+          <p class="body-s" style="color:var(--neutral-700);margin-top:var(--space-2)">Geometric, corporate, matching the angular wordmark.</p>
+        </div>
+        <div class="fam">
+          <span class="lbl">Body / UI — Inter</span>
+          <p class="body-l" style="margin-top:var(--space-3);max-width:70ch">A modern holding group connecting people, natural resources and capital into durable, long-horizon opportunities across sectors and geographies.</p>
+          <p class="body-s" style="color:var(--neutral-700);margin-top:var(--space-2)">Exceptional legibility at UI density · <span class="metric" style="font-size:16px;display:inline">1,240,805.00</span> (tabular numerals)</p>
+        </div>
+      </div>
+
+      <div class="spec">
+        <div class="spec-row"><div class="tag"><b>display-xl</b>72 → 40px · 600</div><div class="demo"><span class="display-xl">Vision</span></div></div>
+        <div class="spec-row"><div class="tag"><b>display-l</b>56 → 34px · 600</div><div class="demo"><span class="display-l">Global opportunity</span></div></div>
+        <div class="spec-row"><div class="tag"><b>h1</b>48 → 30px · 600</div><div class="demo"><span class="h1">Business areas</span></div></div>
+        <div class="spec-row"><div class="tag"><b>h2</b>36 → 26px · 600</div><div class="demo"><span class="h2">Strategic partnerships</span></div></div>
+        <div class="spec-row"><div class="tag"><b>h3</b>28 → 21px · 600</div><div class="demo"><span class="h3">Gold &amp; mining</span></div></div>
+        <div class="spec-row"><div class="tag"><b>h4</b>22 → 18px · 600</div><div class="demo"><span class="h4">Project stage</span></div></div>
+        <div class="spec-row"><div class="tag"><b>body-l</b>18 → 17px · 400</div><div class="demo"><span class="body-l">Lead paragraph copy used beneath section headings.</span></div></div>
+        <div class="spec-row"><div class="tag"><b>body</b>16px · 400</div><div class="demo"><span class="body">Default body copy across marketing and portal surfaces.</span></div></div>
+        <div class="spec-row"><div class="tag"><b>body-s</b>14px · 400</div><div class="demo"><span class="body-s">Captions, UI labels and helper text.</span></div></div>
+        <div class="spec-row"><div class="tag"><b>caption</b>12px · 500</div><div class="demo"><span class="caption">META · UPDATED 12 MAR</span></div></div>
+        <div class="spec-row"><div class="tag"><b>eyebrow</b>12px · 600</div><div class="demo"><span class="eyebrow">People · Resources · Opportunity</span></div></div>
+        <div class="spec-row"><div class="tag"><b>button</b>15px · 600</div><div class="demo"><span style="font-size:15px;font-weight:600;letter-spacing:.01em">Request introduction</span></div></div>
+        <div class="spec-row"><div class="tag"><b>portal-metric</b>32 → 26px</div><div class="demo"><span class="metric">18,420</span></div></div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" id="tokens">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Section C</span>
+        <h2>Design tokens</h2>
+        <p>A 4px base with an 8px rhythm, restrained radii, navy-tinted shadows and a 12/8/4 column grid. Tokens are the single source of truth consumed by every component.</p>
+      </div>
+
+      <div class="group-label">Spacing scale (4px base, 8px rhythm)</div>
+      <div style="max-width:640px">
+        <div class="token-row"><span class="tname">space-1 · 4</span><span class="bar" style="width:4px"></span></div>
+        <div class="token-row"><span class="tname">space-2 · 8</span><span class="bar" style="width:8px"></span></div>
+        <div class="token-row"><span class="tname">space-3 · 12</span><span class="bar" style="width:12px"></span></div>
+        <div class="token-row"><span class="tname">space-4 · 16</span><span class="bar" style="width:16px"></span></div>
+        <div class="token-row"><span class="tname">space-5 · 24</span><span class="bar" style="width:24px"></span></div>
+        <div class="token-row"><span class="tname">space-6 · 32</span><span class="bar" style="width:32px"></span></div>
+        <div class="token-row"><span class="tname">space-7 · 48</span><span class="bar" style="width:48px"></span></div>
+        <div class="token-row"><span class="tname">space-8 · 64</span><span class="bar" style="width:64px"></span></div>
+        <div class="token-row"><span class="tname">space-9 · 96</span><span class="bar" style="width:96px"></span></div>
+        <div class="token-row"><span class="tname">space-10 · 128</span><span class="bar" style="width:128px"></span></div>
+        <div class="token-row"><span class="tname">space-11 · 160</span><span class="bar" style="width:160px"></span></div>
+      </div>
+
+      <div class="group-label" style="margin-top:var(--space-8)">Radius (restrained — premium-editorial, not pill-heavy)</div>
+      <div class="radius-demo">
+        <div style="border-radius:var(--radius-xs)">radius-xs 4</div>
+        <div style="border-radius:var(--radius-sm)">radius-sm 6</div>
+        <div style="border-radius:var(--radius-md)">radius-md 10</div>
+        <div style="border-radius:var(--radius-lg)">radius-lg 16</div>
+        <div style="border-radius:var(--radius-xl)">radius-xl 24</div>
+        <div style="border-radius:var(--radius-full)">radius-full</div>
+      </div>
+
+      <div class="group-label" style="margin-top:var(--space-8)">Shadows (navy-tinted, restrained)</div>
+      <div class="shadow-demo">
+        <div style="box-shadow:var(--shadow-1)">shadow-1</div>
+        <div style="box-shadow:var(--shadow-2)">shadow-2</div>
+        <div style="box-shadow:var(--shadow-3)">shadow-3</div>
+        <div style="box-shadow:var(--shadow-gold);background:var(--gold-500);color:var(--navy-900)">shadow-gold</div>
+      </div>
+
+      <div class="group-label" style="margin-top:var(--space-4)">Layout</div>
+      <div class="arch-grid">
+        <div class="arch"><b>container-max</b><h4>1280px</h4><p>Marketing pages.</p></div>
+        <div class="arch"><b>container-narrow</b><h4>880px</h4><p>Editorial and prose.</p></div>
+        <div class="arch"><b>container-portal</b><h4>1440px</h4><p>Portal application.</p></div>
+        <div class="arch"><b>grid-columns</b><h4>12 / 8 / 4</h4><p>Desktop / tablet / mobile.</p></div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" id="components">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Section F</span>
+        <h2>Component preview</h2>
+        <p>Buttons, badges, cards and form controls rendered on-brand. Hover and focus states are live — tab through this section to see the focus ring in MAP Blue.</p>
+      </div>
+
+      <div class="group-label">Buttons</div>
+      <div class="btn-row" style="margin-bottom:var(--space-7)">
+        <button class="btn btn-primary">Request introduction</button>
+        <button class="btn btn-outline">View opportunities</button>
+        <button class="btn btn-ghost">Learn more</button>
+        <button class="btn btn-gradient">Explore areas</button>
+        <button class="btn btn-primary" disabled>Disabled</button>
+      </div>
+
+      <div class="group-label">Status badges</div>
+      <div class="btn-row" style="margin-bottom:var(--space-7)">
+        <span class="badge badge-open"><span class="dot"></span>Open</span>
+        <span class="badge badge-pending"><span class="dot"></span>Reviewing</span>
+        <span class="badge badge-info"><span class="dot"></span>In progress</span>
+        <span class="badge badge-danger"><span class="dot"></span>Closed</span>
+        <span class="badge badge-neutral">Future</span>
+      </div>
+
+      <div class="group-label">Cards</div>
+      <div class="card-grid">
+        <article class="card">
+          <div class="thumb"><span class="badge badge-solid-teal tagbadge">Active</span></div>
+          <div class="body">
+            <span class="eyebrow">Business area</span>
+            <h3>Gold &amp; Mining</h3>
+            <p>Extraction, processing and value-added development across gold-bearing regions.</p>
+            <footer>Explore area →</footer>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb warm"><span class="badge badge-neutral tagbadge">Developing</span></div>
+          <div class="body">
+            <span class="eyebrow">Opportunity</span>
+            <h3>International Solar / PV</h3>
+            <p>Utility-scale photovoltaic development and grid-linked infrastructure partnerships.</p>
+            <footer>View opportunity →</footer>
+          </div>
+        </article>
+        <article class="card card-dark">
+          <div class="thumb navybar"><span class="badge badge-pending tagbadge">Future</span></div>
+          <div class="body">
+            <span class="eyebrow" style="color:var(--gold-300)">Business area</span>
+            <h3>AI Agents &amp; Technology</h3>
+            <p>Applied intelligence, automation and security/fraud-detection products and services.</p>
+            <footer style="color:var(--gold-300)">Explore area →</footer>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Section F</span>
+        <h2>Forms &amp; controls</h2>
+        <p>Accessible labels, helper text, error association and 44px minimum targets. The toggle reflects the true/false states used in portal settings.</p>
+      </div>
+      <div class="form-grid">
+        <div class="field"><label for="f-name">Full name</label><input id="f-name" type="text" placeholder="Jane Doe" /></div>
+        <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" placeholder="jane@company.com" /></div>
+        <div class="field"><label for="f-area">Business area</label>
+          <select id="f-area"><option>Gold &amp; Mining</option><option>Real Estate</option><option>International Solar / PV</option><option>Technology</option></select>
+        </div>
+        <div class="field err"><label for="f-phone">Phone</label><input id="f-phone" type="tel" value="+1 " aria-invalid="true" /><span class="error">Please enter a valid phone number.</span></div>
+        <div class="field full"><label for="f-msg">Message</label><textarea id="f-msg" placeholder="How can we help?"></textarea><span class="help">We respond to qualified enquiries within two business days.</span></div>
+        <div class="field"><span style="font-size:13px;font-weight:600">Notifications</span>
+          <div class="check"><span class="toggle" role="switch" aria-checked="true" aria-label="Email notifications"></span><span class="body-s">Email updates</span></div>
+        </div>
+        <div class="field"><span style="font-size:13px;font-weight:600">Preferences</span>
+          <div class="check"><span class="toggle" role="switch" aria-checked="false" aria-label="SMS notifications"></span><span class="body-s">SMS alerts</span></div>
+        </div>
+      </div>
+      <div class="btn-row" style="margin-top:var(--space-6)">
+        <button class="btn btn-primary">Send enquiry</button>
+        <button class="btn btn-ghost">Cancel</button>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" id="motion">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Sections I · J</span>
+        <h2>Motion</h2>
+        <p>Restrained and purposeful: controlled fade-and-rise reveals, gentle image scale, short transitions on the standard easing curve. Bounce and overshoot are forbidden, and <code>prefers-reduced-motion</code> is honoured.</p>
+      </div>
+      <div class="reveal-demo" style="margin-bottom:var(--space-6)">
+        <span class="bar2"></span><span class="bar2"></span><span class="bar2"></span>
+        <span class="caption" style="color:var(--neutral-500)">Staggered reveal · 700ms · ease-entrance · ≤80ms stagger</span>
+      </div>
+      <div class="hover-zoom" title="Hover to preview the 1.03 image scale"><i></i></div>
+      <p class="caption" style="color:var(--neutral-500);margin-top:var(--space-3)">Hover the frame above — image zoom is capped at 1.03 with a 420ms ease-standard transition.</p>
+    </div>
+  </section>
+
+  <section class="section" id="portal">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Section E</span>
+        <h2>Client portal shell</h2>
+        <p>The same brand tokens in a denser, operational context: persistent left rail, search, notifications and tabular data. Founding Partners lives in a separate gated namespace. <strong>UI only — no auth or data in Phase 1.</strong></p>
+      </div>
+      <div class="portal">
+        <aside class="rail" aria-label="Portal navigation">
+          <div class="brandline"><span class="sq"></span><b>MAP</b></div>
+          <a class="on" href="#portal">Dashboard</a>
+          <a href="#portal">Applications</a>
+          <a href="#portal">Projects</a>
+          <a href="#portal">Documents</a>
+          <a href="#portal">Messages</a>
+          <a href="#portal">Notifications</a>
+          <a href="#portal">Profile</a>
+          <a href="#portal">Settings</a>
+        </aside>
+        <div class="main">
+          <div class="topbar2">
+            <h3>Dashboard</h3>
+            <span class="badge badge-solid-teal" style="margin-left:auto">Verified client</span>
+          </div>
+          <div class="metrics">
+            <div class="metric-card"><span class="lbl">Open applications</span><span class="val">03</span><span class="sub">+1 this month</span></div>
+            <div class="metric-card"><span class="lbl">Active projects</span><span class="val">07</span><span class="sub">2 in review</span></div>
+            <div class="metric-card"><span class="lbl">Documents</span><span class="val">24</span><span class="sub">All current</span></div>
+            <div class="metric-card"><span class="lbl">Unread</span><span class="val">02</span><span class="sub">Messages</span></div>
+          </div>
+          <table class="tbl">
+            <caption class="caption" style="text-align:left;color:var(--neutral-500);margin-bottom:10px">Recent applications</caption>
+            <thead><tr><th scope="col">Reference</th><th scope="col">Project</th><th scope="col">Stage</th><th scope="col">Updated</th></tr></thead>
+            <tbody>
+              <tr><td>MAP-2451</td><td>Solar / PV — Phase II</td><td><span class="badge badge-open"><span class="dot"></span>Open</span></td><td>12 Mar</td></tr>
+              <tr><td>MAP-2438</td><td>Gold-area rental</td><td><span class="badge badge-pending"><span class="dot"></span>Reviewing</span></td><td>08 Mar</td></tr>
+              <tr><td>MAP-2402</td><td>Basalt processing</td><td><span class="badge badge-info"><span class="dot"></span>In progress</span></td><td>27 Feb</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" id="architecture">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Phase 1 deliverable</span>
+        <h2>Architecture sections A–Q</h2>
+        <p>The full written proposal lives in <code>docs/PHASE-1-ARCHITECTURE.md</code>. This preview renders Sections A–F visually; the remainder is documentation.</p>
+      </div>
+      <div class="arch-grid">
+        <div class="arch"><b>A</b><h4>Brand system</h4><p>Palette, gradients, contrast pairs — rendered live above.</p></div>
+        <div class="arch"><b>B</b><h4>Typography</h4><p>Sora + Inter with a 14-step fluid scale.</p></div>
+        <div class="arch"><b>C</b><h4>Design tokens</h4><p>Space, radius, shadow, borders, motion, layout.</p></div>
+        <div class="arch"><b>D</b><h4>Website IA</h4><p>Home → About → Business Areas → Projects → Partnerships → Contact → Portal.</p></div>
+        <div class="arch"><b>E</b><h4>Portal IA</h4><p>Gated shell plus a separate Founding Partners namespace.</p></div>
+        <div class="arch"><b>F</b><h4>Components</h4><p>Layout, nav, marketing, cards, forms, feedback, portal, media.</p></div>
+        <div class="arch"><b>G</b><h4>Content model</h4><p>BusinessArea, Project, Opportunity schemas — data-first.</p></div>
+        <div class="arch"><b>H</b><h4>Responsive</h4><p>Desktop, tablet and mobile behaviour per component.</p></div>
+        <div class="arch"><b>I</b><h4>Motion</h4><p>Tokens, allowed patterns, forbidden patterns, reduced motion.</p></div>
+        <div class="arch"><b>J</b><h4>Video</h4><p>Poster-first, lazy, connection-aware, captions in HTML.</p></div>
+        <div class="arch"><b>K</b><h4>Performance</h4><p>LCP &lt; 2.5s, CLS &lt; 0.1, INP &lt; 200ms budgets.</p></div>
+        <div class="arch"><b>L</b><h4>Accessibility</h4><p>Keyboard, contrast, focus, ARIA, 44px targets.</p></div>
+        <div class="arch"><b>M</b><h4>SEO</h4><p>Titles, OG, structured data, sitemap, noindex private.</p></div>
+        <div class="arch"><b>N</b><h4>Tech stack</h4><p>Next.js App Router + TypeScript, tokens, clean seams.</p></div>
+        <div class="arch"><b>O</b><h4>Project structure</h4><p>Proposed directory tree.</p></div>
+        <div class="arch"><b>P</b><h4>Roadmap</h4><p>Ten sequential implementation phases.</p></div>
+        <div class="arch"><b>Q</b><h4>First build step</h4><p>Brand foundation in code, not pages.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="cols">
+      <div>
+        <div class="mark" style="margin-bottom:var(--space-4)">
+          <span class="glyph" style="background:var(--grad-warm)"></span>
+          <span class="word"><b>MAP</b><span>HOLDING</span></span>
+        </div>
+        <p class="body-s" style="max-width:34ch">People · Resources · Opportunity. A live preview of the Phase 1 brand system.</p>
+      </div>
+      <div><h5>Company</h5><a href="#board">About</a><a href="#architecture">Business Areas</a><a href="#architecture">Projects</a><a href="#architecture">Partnerships</a></div>
+      <div><h5>Access</h5><a href="#portal">Client Portal</a><a href="#portal">Founding Partners</a><a href="#architecture">Contact</a></div>
+      <div><h5>System</h5><a href="#palette">Palette</a><a href="#typography">Typography</a><a href="#tokens">Tokens</a><a href="#components">Components</a></div>
+    </div>
+    <div class="legalbar">
+      <span>© MAP HOLDING — PHASE 1 BRAND SYSTEM PREVIEW</span>
+      <span>NO PAGES · NO ROUTES · NO DATABASE · NO AUTH</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
+

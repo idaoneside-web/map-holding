@@ -1,0 +1,7 @@
+.logo {
+  display: block;
+  max-width: 100%;
+  /* The mark must never be distorted, ever. */
+  object-fit: contain;
+  height: auto;
+}

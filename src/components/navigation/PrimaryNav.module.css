@@ -1,0 +1,21 @@
+.nav {
+  display: none;
+  min-width: 0;
+}
+
+/* Hidden below the desktop breakpoint; the drawer takes over there. */
+@media (min-width: 1024px) {
+  .nav {
+    display: block;
+  }
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-width: 0;
+}

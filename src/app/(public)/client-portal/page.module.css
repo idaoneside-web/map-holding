@@ -1,0 +1,160 @@
+/* ==========================================================================
+   Client Portal landing page (public).
+   Token-driven only. No raw colour, no raw type value.
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(28rem, 70vh, 44rem);
+}
+
+.heroLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.heroInner {
+  position: relative;
+  z-index: var(--z-raised);
+  display: flex;
+  align-items: center;
+  min-height: clamp(28rem, 70vh, 44rem);
+  padding-block: var(--space-10);
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 48ch;
+  min-width: 0;
+}
+
+.statement {
+  margin: 0;
+  font-size: var(--font-size-eyebrow);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--font-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-brand-gold-300);
+}
+
+.heroTitle {
+  margin: 0;
+}
+
+.heroLead {
+  max-width: 52ch;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+/* --- Capability cards ---------------------------------------------------- */
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  border: var(--border-w-1) solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-raised);
+  min-width: 0;
+  transition: box-shadow var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.feature:hover {
+  box-shadow: 0 0 0 var(--border-w-2) var(--color-brand-gold-400);
+}
+
+.featureTitle {
+  margin: 0;
+  font-size: var(--font-size-h4);
+  color: var(--color-text-strong);
+}
+
+.featureBody {
+  margin: 0;
+}
+
+/* --- Visible / never-visible split --------------------------------------- */
+
+.split {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 768px) {
+  .split {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border: var(--border-w-1) solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-raised);
+  min-width: 0;
+}
+
+.panelTitle {
+  margin: 0;
+  font-size: var(--font-size-h4);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.listItem {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: baseline;
+  font-size: var(--font-size-body-s);
+  line-height: var(--font-line-height-body-s);
+  color: var(--color-text-default);
+  min-width: 0;
+}
+
+.allow,
+.deny {
+  flex: none;
+  font-weight: var(--font-weight-semibold);
+  line-height: inherit;
+}
+
+.allow {
+  color: var(--color-semantic-success-deep);
+}
+
+.deny {
+  color: var(--color-semantic-danger-deep);
+}
+
+.ctaActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.code {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-body-s);
+}

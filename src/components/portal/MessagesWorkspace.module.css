@@ -1,0 +1,25 @@
+.layout {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    grid-template-columns: minmax(17rem, 22rem) minmax(0, 1fr);
+    gap: var(--space-7);
+  }
+}
+
+.listCol {
+  min-width: 0;
+}
+
+.detailCol {
+  min-width: 0;
+  padding: var(--space-6);
+  border: var(--border-w-1) solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background-color: color-mix(in srgb, var(--color-brand-ivory-50) 3.5%, transparent);
+}

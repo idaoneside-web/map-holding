@@ -1,0 +1,137 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  min-width: 0;
+}
+
+/* The Phase 2 overflow rule: a wide table scrolls inside its own box instead of
+   widening the document. */
+.scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  border: var(--border-w-1) solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-raised);
+}
+
+.table {
+  width: 100%;
+  min-width: 40rem;
+  border-collapse: collapse;
+  font-size: var(--font-size-body-s);
+}
+
+.caption {
+  caption-side: top;
+  padding: var(--space-4) var(--space-4) 0;
+  text-align: left;
+  font-size: var(--font-size-caption);
+  line-height: var(--font-line-height-caption);
+  color: var(--color-text-muted);
+}
+
+.rowHead,
+.colHead {
+  text-align: left;
+  vertical-align: bottom;
+  padding: var(--space-3) var(--space-3);
+  border-bottom: var(--border-w-1) solid var(--color-border-default);
+}
+
+.colHead {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-default);
+}
+
+.kind {
+  display: block;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-caption);
+  color: var(--color-text-strong);
+  overflow-wrap: anywhere;
+}
+
+.inside {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.6875rem;
+  letter-spacing: var(--font-tracking-caption);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.rowHead {
+  position: sticky;
+  left: 0;
+  /* Sticky so the class name stays readable while the matrix scrolls. */
+  background-color: var(--color-bg-raised);
+  z-index: var(--z-raised);
+}
+
+.className {
+  display: block;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-caption);
+  color: var(--color-text-strong);
+}
+
+.flag {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+}
+
+/* Reachability is never colour-only: the glyph and a visually-hidden word carry
+   the meaning, and the colour is additive. */
+.yes,
+.no {
+  padding: var(--space-3);
+  text-align: center;
+  border-bottom: var(--border-w-1) solid var(--color-border-default);
+  font-variant-numeric: tabular-nums;
+}
+
+.yes {
+  color: var(--color-semantic-success-deep);
+  font-weight: var(--font-weight-semibold);
+}
+
+.no {
+  color: var(--color-text-muted);
+}
+
+/* --- Plain-language legend --------------------------------------------- */
+
+.meanings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+  gap: var(--space-4);
+  margin: 0;
+  min-width: 0;
+}
+
+.meaning {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  border: var(--border-w-1) solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  min-width: 0;
+}
+
+.meaningTerm {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-strong);
+}
+
+.meaningBody {
+  margin: 0;
+  font-size: var(--font-size-caption);
+  line-height: var(--font-line-height-caption);
+  color: var(--color-text-default);
+}

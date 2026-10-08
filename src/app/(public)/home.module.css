@@ -1,0 +1,134 @@
+/* ==========================================================================
+   Home route — the CINEMATIC SCROLL JOURNEY.
+   Full-height editorial beats over one fixed 3D world (ScrollStory).
+   Token-driven only. No raw colour, no raw type value.
+   ========================================================================== */
+
+.journey {
+  position: relative;
+  z-index: 1;
+  /* Dark token set so the shared Heading/Text/Button primitives adapt to the
+     navy world without each beat re-declaring colours. Mirrors Section's dark
+     tone. */
+  color: var(--color-dark-text-strong);
+  --color-text-strong: var(--color-dark-text-strong);
+  --color-text-default: var(--color-dark-text-default);
+  --color-text-muted: var(--color-dark-text-muted);
+  --color-border-default: var(--color-dark-border-default);
+  --color-accent: var(--color-brand-blue-300);
+  --color-accent-gold: var(--color-brand-gold-300);
+}
+
+.beat {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  padding-block: var(--section-padding-block-lg);
+  overflow: hidden;
+}
+
+/* Legibility scrim, ABOVE the chapter clip / 3D world: strongest on the left
+   where the copy sits, clearing to the right so the film stays prominent. It
+   also gives the page a solid, readable look when a clip or WebGL is missing. */
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: linear-gradient(
+    100deg,
+    color-mix(in srgb, var(--color-brand-navy-950) 90%, transparent) 0%,
+    color-mix(in srgb, var(--color-brand-navy-950) 62%, transparent) 34%,
+    color-mix(in srgb, var(--color-brand-navy-950) 16%, transparent) 62%,
+    transparent 100%
+  );
+}
+
+.beatInner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding-block: var(--space-4);
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 46ch;
+}
+
+.statement {
+  margin: 0;
+  font-size: var(--font-size-eyebrow);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--font-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-brand-gold-300);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: var(--font-size-eyebrow);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--font-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-brand-blue-300);
+}
+
+.lead {
+  max-width: 54ch;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.hint {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--font-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-brand-gold-300);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tag {
+  font-size: var(--font-size-caption);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  background-color: color-mix(in srgb, var(--color-brand-gold-500) 18%, transparent);
+  color: var(--color-brand-gold-300);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Operation cards on beat 08 — translucent so the world reads through them. */
+.opCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  height: 100%;
+  padding: var(--space-5);
+  border: var(--border-w-1) solid color-mix(in srgb, var(--color-brand-ivory-50) 14%, transparent);
+  border-radius: var(--radius-lg);
+  background-color: color-mix(in srgb, var(--color-brand-navy-950) 55%, transparent);
+}
+
+.opTitle {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .beat {
+    min-height: 90svh;
+  }
+}

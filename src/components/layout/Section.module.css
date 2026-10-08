@@ -1,0 +1,83 @@
+.section {
+  position: relative;
+  width: 100%;
+}
+
+/* --- Spacing rhythm ---------------------------------------------------- */
+.spacing-none {
+  padding-block: 0;
+}
+.spacing-sm {
+  padding-block: var(--section-padding-block-sm);
+}
+.spacing-md {
+  padding-block: var(--section-padding-block-md);
+}
+.spacing-lg {
+  padding-block: var(--section-padding-block-lg);
+}
+.spacing-xl {
+  padding-block: var(--section-padding-block-xl);
+}
+
+/* --- Light surfaces ---------------------------------------------------- */
+.tone-default {
+  background-color: var(--color-bg-default);
+}
+
+.tone-raised {
+  background-color: var(--color-bg-raised);
+}
+
+.tone-subtle {
+  background-color: var(--color-bg-subtle);
+}
+
+.tone-gradient-ivory {
+  background-image: var(--gradient-ivory);
+}
+
+/* --- Dark surfaces: re-point the semantic token set -------------------- */
+.tone-navy,
+.tone-navy-deep,
+.tone-navy-raised,
+.tone-gradient-navy {
+  color: var(--color-dark-text-strong);
+  --color-bg-default: var(--color-dark-bg-default);
+  --color-bg-raised: var(--color-dark-bg-raised);
+  --color-bg-subtle: var(--color-dark-bg-raised);
+  --color-text-strong: var(--color-dark-text-strong);
+  --color-text-default: var(--color-dark-text-default);
+  --color-text-muted: var(--color-dark-text-muted);
+  --color-border-default: var(--color-dark-border-default);
+  --color-border-light: var(--color-dark-border-default);
+  --color-accent: var(--color-brand-blue-300);
+  --color-accent-gold: var(--color-brand-gold-300);
+}
+
+.tone-navy {
+  background-color: var(--color-dark-bg-default);
+}
+
+.tone-navy-deep {
+  background-color: var(--color-dark-bg-deep);
+}
+
+.tone-navy-raised {
+  background-color: var(--color-dark-bg-raised);
+}
+
+.tone-gradient-navy {
+  background-image: var(--gradient-navy);
+}
+
+/* Brand gradient band: the logo's own amber -> blue -> teal progression.
+   Used as a restrained accent surface, never as a page ground. */
+.tone-gradient-brand {
+  background-image: var(--gradient-brand);
+  color: var(--color-brand-ink-900);
+  --color-text-strong: var(--color-brand-ink-900);
+  --color-text-default: rgb(11 15 25 / 0.82);
+  --color-text-muted: rgb(11 15 25 / 0.68);
+  --color-border-default: rgb(11 15 25 / 0.28);
+}

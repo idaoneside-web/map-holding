@@ -1,0 +1,110 @@
+.nav {
+  min-width: 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  color: var(--color-dark-text-default);
+  font-size: var(--font-size-nav);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+  letter-spacing: var(--font-tracking-nav);
+  text-decoration: none;
+  min-width: 0;
+  transition:
+    color var(--motion-duration-fast) var(--motion-ease-standard),
+    background-color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.link:hover {
+  color: var(--color-dark-text-strong);
+  background-color: color-mix(in srgb, var(--color-brand-ivory-50) 6%, transparent);
+}
+
+/* The gold indicator: a controlled accent, one element, never a full border. */
+.indicator {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 2px;
+  height: 0;
+  border-radius: var(--radius-full);
+  background-image: var(--gradient-warm);
+  transform: translateY(-50%);
+  transition: height var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.link.active {
+  color: var(--color-dark-text-strong);
+  background-color: color-mix(in srgb, var(--color-brand-gold-500) 10%, transparent);
+}
+
+.link.active .indicator {
+  height: calc(100% - var(--space-4));
+}
+
+.link.active .glyph {
+  color: var(--color-brand-gold-300);
+}
+
+.glyph {
+  display: inline-flex;
+  flex: none;
+  color: var(--color-dark-text-muted);
+  transition: color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.link:hover .glyph {
+  color: var(--color-dark-text-strong);
+}
+
+.label {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.badge {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.375rem;
+  padding: 0 var(--space-1);
+  height: 1.375rem;
+  border-radius: var(--radius-full);
+  border: var(--border-w-1) solid color-mix(in srgb, var(--color-brand-gold-500) 55%, transparent);
+  background-color: color-mix(in srgb, var(--color-brand-gold-500) 16%, transparent);
+  color: var(--color-dark-text-strong);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Drawer context: larger rows, no indicator bar ---------------------- */
+.drawer .link {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+}
+
+.drawer .indicator {
+  display: none;
+}
+
+.drawer .link.active {
+  border: var(--border-w-1) solid color-mix(in srgb, var(--color-brand-gold-500) 40%, transparent);
+}

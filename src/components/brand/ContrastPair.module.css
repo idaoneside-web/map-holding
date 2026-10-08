@@ -1,0 +1,33 @@
+.specimen {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 2.5rem;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-semibold);
+  font-size: 1rem;
+  border: var(--border-w-1) solid rgb(0 0 0 / 0.12);
+}
+
+.on {
+  color: var(--color-text-muted);
+}
+
+.right {
+  text-align: right;
+  font-family: var(--font-family-mono);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.pass {
+  color: var(--color-semantic-success-deep);
+  font-weight: var(--font-weight-semibold);
+}
+
+.fail {
+  color: var(--color-semantic-danger-deep);
+  font-weight: var(--font-weight-semibold);
+}

@@ -1,0 +1,143 @@
+.tracker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-3) var(--space-4);
+  min-width: 0;
+}
+
+.markerWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  border: var(--border-w-1) solid var(--color-border-default);
+  background-color: transparent;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-body-s);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding-top: 3px;
+}
+
+.label {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-strong);
+}
+
+.note {
+  font-size: var(--font-size-body-s);
+  line-height: var(--font-line-height-body-s);
+  color: var(--color-text-muted);
+  overflow-wrap: anywhere;
+}
+
+/* --- Marker glyphs ------------------------------------------------------- */
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background-color: currentColor;
+}
+
+.dotHollow {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  border: var(--border-w-1) solid currentColor;
+}
+
+.check,
+.bang {
+  line-height: 1;
+}
+
+/* --- States -------------------------------------------------------------- */
+
+.complete .markerWrap {
+  border-color: color-mix(in srgb, var(--color-semantic-success) 55%, transparent);
+  background-color: color-mix(in srgb, var(--color-semantic-success) 14%, transparent);
+  color: var(--color-semantic-success);
+}
+
+.active .markerWrap {
+  border-color: var(--color-brand-gold-500);
+  background-color: var(--color-brand-gold-500);
+  color: var(--color-brand-ink-900);
+}
+
+.attention .markerWrap {
+  border-color: color-mix(in srgb, var(--color-brand-gold-500) 65%, transparent);
+  background-color: color-mix(in srgb, var(--color-brand-gold-500) 18%, transparent);
+  color: var(--color-brand-gold-300);
+}
+
+.upcoming .markerWrap {
+  color: var(--color-text-muted);
+  border-style: dashed;
+}
+
+/* --- Connectors ---------------------------------------------------------- */
+
+.stage:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 13.5px;
+  top: 32px;
+  bottom: calc(-1 * var(--space-5));
+  width: var(--border-w-1);
+  background-color: var(--color-border-default);
+}
+
+.complete:not(:last-child)::before {
+  background-color: color-mix(in srgb, var(--color-semantic-success) 55%, transparent);
+}
+
+/* --- Horizontal at md and above ----------------------------------------- */
+
+@media (min-width: 768px) {
+  .tracker {
+    flex-direction: row;
+    gap: var(--space-4);
+  }
+
+  .stage {
+    flex: 1 1 0;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+  }
+
+  .text {
+    padding-top: 0;
+  }
+
+  .stage:not(:last-child)::before {
+    left: 34px;
+    right: calc(-1 * var(--space-4));
+    top: 13.5px;
+    bottom: auto;
+    width: auto;
+    height: var(--border-w-1);
+  }
+}

@@ -1,0 +1,17 @@
+/* ==========================================================================
+   MAP HOLDING — RADIUS TOKENS  (Phase 1 §C.4 — restrained, premium-editorial)
+   Default cards lean squarer (`--radius-md`), never pill-heavy.
+   ========================================================================== */
+
+:root {
+  --radius-none: 0;
+  --radius-xs: 4px; /* inputs, tags */
+  --radius-sm: 6px; /* buttons */
+  --radius-md: 10px; /* cards on light */
+  --radius-lg: 16px; /* panels */
+  --radius-xl: 24px; /* hero media frames */
+  --radius-full: 9999px; /* pills, avatars */
+
+  /* brand default for new surfaces */
+  --radius-default: var(--radius-md);
+}

@@ -1,0 +1,62 @@
+.skeleton {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  background-color: color-mix(in srgb, var(--color-text-strong) 9%, transparent);
+  max-width: 100%;
+}
+
+/* --- Shapes ------------------------------------------------------------ */
+.shape-text {
+  border-radius: var(--radius-xs);
+  height: 0.85em;
+}
+
+.shape-block {
+  border-radius: var(--radius-md);
+  height: 4rem;
+}
+
+.shape-circle {
+  border-radius: var(--radius-full);
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+/* --- Text stack -------------------------------------------------------- */
+.textStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+/* One restrained sweep, not a busy shimmer. Uses the brand gold at very low
+   opacity so even the loading state stays in-family. */
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--color-brand-gold-300) 22%, transparent) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  animation: skeletonSweep 1.6s var(--motion-ease-standard) infinite;
+}
+
+@keyframes skeletonSweep {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* Reduced motion: no sweep at all — the flat tint alone is the signal. */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
+    display: none;
+  }
+}

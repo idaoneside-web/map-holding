@@ -1,0 +1,84 @@
+.account {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.name {
+  font-size: var(--font-size-body-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-dark-text-strong);
+  overflow-wrap: anywhere;
+}
+
+.company {
+  font-size: var(--font-size-caption);
+  line-height: var(--font-line-height-caption);
+  color: var(--color-dark-text-muted);
+  overflow-wrap: anywhere;
+}
+
+.signOut {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-w-1) solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--color-dark-text-default);
+  font-size: var(--font-size-nav);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--font-tracking-nav);
+  text-align: left;
+  text-decoration: none;
+  transition:
+    background-color var(--motion-duration-fast) var(--motion-ease-standard),
+    color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.signOut:hover {
+  color: var(--color-dark-text-strong);
+  background-color: color-mix(in srgb, var(--color-brand-ivory-50) 6%, transparent);
+}
+
+.signOutGlyph {
+  display: inline-flex;
+  flex: none;
+  color: var(--color-dark-text-muted);
+}
+
+.note {
+  margin: 0;
+  font-size: var(--font-size-caption);
+  line-height: var(--font-line-height-caption);
+  color: var(--color-dark-text-muted);
+}
+
+/* --- Concise variant for the desktop rail footer ------------------------ */
+.rail .note {
+  max-width: 22ch;
+}
+
+/* --- Drawer variant sits on a raised panel --------------------------------- */
+.drawer {
+  padding: var(--space-4);
+  border: var(--border-w-1) solid var(--color-dark-border-default);
+  border-radius: var(--radius-md);
+  background-color: color-mix(in srgb, var(--color-brand-ivory-50) 4%, transparent);
+}

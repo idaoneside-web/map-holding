@@ -1,0 +1,49 @@
+.nextTitle {
+  margin: 0;
+}
+
+.nextBody {
+  max-width: 56ch;
+}
+
+.nextActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.nextLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: var(--font-size-button);
+}
+
+/* EmptyState + required-content pair: side by side when there is room, stacked
+   when there is not. No per-viewport component, just an auto-fit grid. */
+.emptyWrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+  gap: var(--grid-gap);
+  align-items: start;
+  min-width: 0;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border: var(--border-w-1) solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-raised);
+  min-width: 0;
+}
+
+.emptyTitle {
+  margin: 0;
+}
+
+.emptyBody {
+  max-width: 48ch;
+}

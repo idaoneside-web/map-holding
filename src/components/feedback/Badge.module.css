@@ -1,0 +1,83 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  /* Wrapping (not nowrap): a long label must never widen the page — this was a
+     real overflow defect found in Phase 2. */
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  border: var(--border-w-1) solid var(--color-border-default);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--font-tracking-caption);
+  line-height: var(--font-line-height-caption);
+  max-width: 100%;
+}
+
+.label {
+  overflow-wrap: anywhere;
+}
+
+.glyph {
+  display: inline-flex;
+  flex: none;
+  opacity: 0.75;
+}
+
+/* Tones drive the tint and border only. The label always inherits the current
+   theme's strong text token, so contrast holds on ivory and navy without
+   per-theme variants (same decision as StatusBadge in Phase 2). */
+.neutral {
+  border-color: var(--color-border-default);
+  background-color: color-mix(in srgb, var(--color-text-strong) 5%, transparent);
+  color: var(--color-text-strong);
+}
+
+.brand {
+  border-color: color-mix(in srgb, var(--color-brand-blue-400) 45%, transparent);
+  background-color: color-mix(in srgb, var(--color-brand-blue-400) 12%, transparent);
+  color: var(--color-text-strong);
+}
+
+.gold {
+  border-color: color-mix(in srgb, var(--color-brand-gold-500) 55%, transparent);
+  background-color: color-mix(in srgb, var(--color-brand-gold-500) 16%, transparent);
+  color: var(--color-text-strong);
+}
+
+.success {
+  border-color: color-mix(in srgb, var(--color-semantic-success) 50%, transparent);
+  background-color: color-mix(in srgb, var(--color-semantic-success) 14%, transparent);
+  color: var(--color-text-strong);
+}
+
+.info {
+  border-color: color-mix(in srgb, var(--color-semantic-info) 50%, transparent);
+  background-color: color-mix(in srgb, var(--color-semantic-info) 14%, transparent);
+  color: var(--color-text-strong);
+}
+
+.warning {
+  border-color: color-mix(in srgb, var(--color-semantic-warning) 55%, transparent);
+  background-color: color-mix(in srgb, var(--color-semantic-warning) 16%, transparent);
+  color: var(--color-text-strong);
+}
+
+.danger {
+  border-color: color-mix(in srgb, var(--color-semantic-danger) 50%, transparent);
+  background-color: color-mix(in srgb, var(--color-semantic-danger) 12%, transparent);
+  color: var(--color-text-strong);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-xs);
+  background-color: color-mix(in srgb, var(--color-text-strong) 6%, transparent);
+  font-size: var(--font-size-caption);
+  line-height: var(--font-line-height-caption);
+  color: var(--color-text-default);
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}

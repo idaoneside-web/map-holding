@@ -1,0 +1,67 @@
+.strip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: var(--border-w-1) solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .strip {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.item {
+  min-width: 0;
+}
+
+/* Hairline dividers between cells instead of four separate card borders. */
+.item + .item {
+  border-left: var(--border-w-hair) solid var(--color-border-default);
+}
+
+/* On the 2-column layout the second row needs a top rule. */
+@media (max-width: 767px) {
+  .item:nth-child(3) {
+    border-top: var(--border-w-hair) solid var(--color-border-default);
+  }
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-5);
+  height: 100%;
+  text-decoration: none;
+  color: var(--color-text-default);
+  transition: background-color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.link:hover {
+  background-color: color-mix(in srgb, var(--color-brand-ivory-50) 5%, transparent);
+}
+
+.value {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-portal-metric);
+  line-height: var(--font-line-height-metric);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-strong);
+}
+
+.label {
+  font-size: var(--font-size-body-s);
+  letter-spacing: var(--font-tracking-caption);
+  color: var(--color-text-default);
+}
+
+.hint {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+}

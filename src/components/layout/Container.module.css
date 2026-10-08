@@ -1,0 +1,21 @@
+.container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.default {
+  max-width: var(--container-max);
+}
+
+.narrow {
+  max-width: var(--container-narrow);
+}
+
+.portal {
+  max-width: var(--container-portal);
+}
+
+.full {
+  max-width: none;
+}

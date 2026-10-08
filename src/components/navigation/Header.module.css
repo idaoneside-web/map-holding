@@ -1,0 +1,63 @@
+/* Sticky, above page content but below the drawer and toasts. */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  min-height: 64px;
+  padding-block: var(--space-3);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  text-decoration: none;
+  /* The lockup is a fixed-height asset; the link must not stretch or squash it. */
+  line-height: 0;
+}
+
+/* Layout only. This must NOT set `display`: the `PrimaryNav` element carries
+   this class, and it owns its own display logic and breakpoint. Setting
+   `display` here overrode the nav's own `display: none`, which made the full
+   desktop navigation lay out at 320px and pushed the document to 425px wide —
+   a real horizontal-overflow and duplicate-navigation defect. */
+.nav {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .nav {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: none;
+}
+
+/* The portal CTA only appears once the full nav is available. */
+.portal {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .portal {
+    display: inline-flex;
+  }
+
+  .inner {
+    gap: var(--space-6);
+  }
+}

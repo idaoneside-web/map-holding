@@ -1,0 +1,45 @@
+.lab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.readout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.hint {
+  max-width: 60ch;
+}
+
+.stage {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-4);
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-5);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-raised);
+  border: var(--border-w-1) solid var(--color-border-default);
+  box-shadow: var(--shadow-2);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.glow {
+  /* demonstrated so the gold-glow hover token is visible in the gallery */
+  transition: box-shadow var(--motion-duration-base) var(--motion-ease-standard);
+}

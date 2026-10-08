@@ -1,0 +1,46 @@
+.divider {
+  border: 0;
+  flex: none;
+}
+
+.horizontalWrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.horizontal {
+  display: block;
+  width: 100%;
+  height: var(--border-w-1);
+}
+
+.vertical {
+  display: inline-block;
+  width: var(--border-w-1);
+  align-self: stretch;
+  min-height: 1.25em;
+}
+
+.default {
+  background-color: var(--color-border-default);
+}
+
+.strong {
+  background-color: var(--color-text-strong);
+  opacity: 0.55;
+}
+
+.brand {
+  height: var(--border-w-2);
+  background-image: var(--gradient-rule);
+}
+
+.spaced {
+  margin-block: var(--space-6);
+}
+
+.horizontal.spaced {
+  margin-block: var(--space-6);
+}

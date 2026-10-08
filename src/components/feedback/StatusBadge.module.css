@@ -1,0 +1,49 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  border: var(--border-w-1) solid color-mix(in srgb, var(--badge-tone) 45%, transparent);
+  background-color: color-mix(in srgb, var(--badge-tone) 14%, transparent);
+  color: var(--color-text-strong);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-s);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--font-line-height-body-s);
+  max-width: 100%;
+}
+
+.dot {
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--radius-full);
+  background-color: var(--badge-tone);
+}
+
+.label {
+  /* A badge must be able to shrink and wrap rather than push the page wider. */
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* --- Tone sources (brand-native where the identity provides a hue) ----- */
+.success {
+  --badge-tone: var(--color-semantic-success);
+}
+.warning {
+  --badge-tone: var(--color-semantic-warning);
+}
+.danger {
+  --badge-tone: var(--color-semantic-danger);
+}
+.info {
+  --badge-tone: var(--color-semantic-info);
+}
+.pending {
+  --badge-tone: var(--color-semantic-pending);
+}
+.neutral {
+  --badge-tone: var(--color-neutral-500);
+}

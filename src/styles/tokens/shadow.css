@@ -1,0 +1,12 @@
+/* ==========================================================================
+   MAP HOLDING — SHADOW TOKENS  (Phase 1 §C.5 — restrained, navy-tinted)
+   The tint is the approved MAP Navy token, so shadows stay in-family:
+   navy-900 = #080b1e -> rgb(8 11 30);  gold-500 = #f39639 -> rgb(243 150 57).
+   ========================================================================== */
+
+:root {
+  --shadow-1: 0 1px 2px rgb(8 11 30 / 0.06); /* raised inputs  */
+  --shadow-2: 0 4px 16px rgb(8 11 30 / 0.08); /* cards          */
+  --shadow-3: 0 12px 32px rgb(8 11 30 / 0.12); /* modals/overlays */
+  --shadow-gold: 0 8px 28px rgb(243 150 57 / 0.28); /* primary CTA hover only */
+}

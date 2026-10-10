@@ -16,16 +16,36 @@ import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "Client Portal",
-  description: "The MAP Holding Client Portal \u2014 secure access to your applications, projects, documents and messages.",
+  description:
+    "The MAP Holding Client Portal \u2014 preview environment for interface development. Not authenticated, not indexed, and all records shown are sample data.",
+  robots: { index: false, follow: false },
 };
 
 const CAPABILITIES = [
-  { title: "Applications and status", body: "Follow each application from submission through review to decision, and see what is waiting on you." },
-  { title: "Projects you are a party to", body: "Projects you are a party to, with only the information released to you." },
-  { title: "Documents released to you", body: "Only the documents explicitly released to you. Internal MAP Holding material never appears." },
-  { title: "Secure messages", body: "Communication about your applications and projects, kept in one place." },
-  { title: "Your account", body: "Your profile and account details, and how MAP Holding reaches you." },
-  { title: "Notifications", body: "Told when something needs you, and when the status of an application changes." },
+  {
+    title: "Applications and status",
+    body: "Follow each application from submission through review to decision, and see what is waiting on you.",
+  },
+  {
+    title: "Projects you are a party to",
+    body: "Projects you are a party to, with only the information released to you.",
+  },
+  {
+    title: "Documents released to you",
+    body: "Only the documents explicitly released to you. Internal MAP Holding material never appears.",
+  },
+  {
+    title: "Secure messages",
+    body: "Communication about your applications and projects, kept in one place.",
+  },
+  {
+    title: "Your account",
+    body: "Your profile and account details, and how MAP Holding reaches you.",
+  },
+  {
+    title: "Notifications",
+    body: "Told when something needs you, and when the status of an application changes.",
+  },
 ];
 
 export default function ClientPortalLandingPage() {
@@ -33,7 +53,9 @@ export default function ClientPortalLandingPage() {
   return (
     <>
       <Section tone="navy-deep" spacing="none" as="div" className={styles.hero}>
-        <div className={styles.heroLayer}><Hero3D /></div>
+        <div className={styles.heroLayer}>
+          <Hero3D />
+        </div>
         <Container className={styles.heroInner}>
           <Stack gap="lg" align="start">
             <Breadcrumbs items={crumbs} />
@@ -43,12 +65,17 @@ export default function ClientPortalLandingPage() {
                 Client Portal
               </Heading>
               <Text variant="body-l" tone="default" className={styles.heroLead}>
-                A private environment for MAP Holding clients. Access your applications, projects, documents and messages — all in one secure place.
+                A private environment for MAP Holding clients. Access your applications, projects,
+                documents and messages — all in one secure place.
               </Text>
             </div>
             <div className={styles.heroActions}>
-              <Button href="/client-portal/login" variant="primary" size="lg">Secure Client Login</Button>
-              <Button href="/about" variant="outline" size="lg">Explore the group</Button>
+              <Button href="/client-portal/login" variant="primary" size="lg">
+                Secure Client Login
+              </Button>
+              <Button href="/about" variant="outline" size="lg">
+                Explore the group
+              </Button>
             </div>
           </Stack>
         </Container>
@@ -57,7 +84,10 @@ export default function ClientPortalLandingPage() {
       <Section tone="default" spacing="lg">
         <Container>
           <Stack gap="xl">
-            <SectionHeader level={2} eyebrow="What you get" title="Your client environment"
+            <SectionHeader
+              level={2}
+              eyebrow="What you get"
+              title="Your client environment"
               lead="Everything you need to manage your relationship with MAP Holding, from one signed-in location."
             />
             <Grid min="18rem" gap="md">
@@ -72,16 +102,79 @@ export default function ClientPortalLandingPage() {
       <Section tone="navy" spacing="lg">
         <Container>
           <Stack gap="lg" align="start">
-            <SectionHeader level={2} eyebrow="Access" title="Secure Client Login"
+            <SectionHeader
+              level={2}
+              eyebrow="Access"
+              title="Secure Client Login"
               lead="Sign in to reach your applications, projects, documents and messages."
             />
             <div className={styles.heroActions}>
-              <Button href="/client-portal/login" variant="primary" size="lg">Sign in to the Client Portal</Button>
+              <Button href="/client-portal/login" variant="primary" size="lg">
+                Sign in to the Client Portal
+              </Button>
             </div>
             <Text variant="body-s" tone="muted">
-              Not a client? The Client Portal is a separate protected environment. If you believe you should have access, contact MAP Holding through the{" "}
-              <Link href="/contact" variant="subtle">contact page</Link>.
+              Not a client? The Client Portal is a separate protected environment. If you believe
+              you should have access, contact MAP Holding through the{" "}
+              <Link href="/contact" variant="subtle">
+                contact page
+              </Link>
+              .
             </Text>
+          </Stack>
+        </Container>
+      </Section>
+
+      <Section tone="subtle" spacing="lg">
+        <Container>
+          <Stack gap="md">
+            <SectionHeader
+              level={2}
+              eyebrow="Preview notice"
+              title="This is a preview environment"
+              lead="The Client Portal shown here is a development preview for interface demonstration. It is not connected to a live backend."
+            />
+            <div className={styles.previewPanel}>
+              <ul className={styles.previewList}>
+                <li>
+                  <span className={styles.previewAllow}>All client records</span>
+                  <span>
+                    are sample data for interface development — not real client accounts or project
+                    records.
+                  </span>
+                </li>
+                <li>
+                  <span className={styles.previewAllow}>Sign-in does not verify credentials</span>
+                  <span>
+                    . Submitting the login form takes you directly into the preview without
+                    authentication.
+                  </span>
+                </li>
+                <li>
+                  <span className={styles.previewAllow}>
+                    Profile changes, messages, documents, and settings
+                  </span>
+                  <span>
+                    are stored locally in your browser only. They are not sent to any server and do
+                    not persist across devices.
+                  </span>
+                </li>
+                <li>
+                  <span className={styles.previewDeny}>
+                    Do not upload confidential or sensitive documents
+                  </span>
+                  <span>
+                    in this preview environment. Uploaded files remain in your browser localStorage
+                    and are not transmitted securely.
+                  </span>
+                </li>
+              </ul>
+              <Text variant="body-s" tone="muted" className={styles.previewNote}>
+                The real Client Portal will be deployed as a separate authenticated environment with
+                server-side data storage, per the access-control architecture in{" "}
+                <code className={styles.code}>docs/ACCESS-CONTROL-ARCHITECTURE.md</code>.
+              </Text>
+            </div>
           </Stack>
         </Container>
       </Section>
@@ -92,8 +185,12 @@ export default function ClientPortalLandingPage() {
 function CapabilityCard({ title, body }: { title: string; body: string }) {
   return (
     <div className={styles.feature}>
-      <Heading level={3} className={styles.featureTitle}>{title}</Heading>
-      <Text variant="body-s" tone="default" className={styles.featureBody}>{body}</Text>
+      <Heading level={3} className={styles.featureTitle}>
+        {title}
+      </Heading>
+      <Text variant="body-s" tone="default" className={styles.featureBody}>
+        {body}
+      </Text>
     </div>
   );
 }

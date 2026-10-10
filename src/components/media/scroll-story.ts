@@ -7,20 +7,30 @@
  * form is driven entirely by scroll progress (`uProgress`), so the homepage
  * reads as one cinematic journey rather than a set of animated cards.
  *
- * The world morphs through nine beats, matching the MAP Holding business
- * story. Adjacent beats cross-map by blending two signed-distance fields, so
- * scrolling forward transforms one environment into the next and scrolling
- * back reverses it exactly:
+ * The world morphs through fifteen chapters, matching the approved MAP Holding
+ * cinematic journey. Adjacent chapters cross-map by blending two signed-distance
+ * fields, so scrolling forward transforms one environment into the next and
+ * scrolling back reverses it exactly:
  *
- *   0 Opportunity        (open ground, the ribbon alone)
- *   1 Mining & Minerals  (terraced pit, mineral specks)
- *   2 Energy             (solar array)
- *   3 Real Estate        (skyline of blocks)
- *   4 Technology         (data lattice)
- *   5 Industrial         (pipes and machinery)
- *   6 Strategic          (struts converging on a hub)
- *   7 Operations         (four pillars)
- *   8 MAP Holding        (the ribbon resolves, alone again)
+ *   0  Opportunity              (open ground, the ribbon alone)
+ *   1  Mining & Minerals        (terraced pit, mineral specks)
+ *   2  Energy & Infrastructure  (city skyline, solar array)
+ *   3  Real Estate & Materials  (towers, and a crane on site)
+ *   4  Technology & Innovation  (data lattice, a robot at work)
+ *   5  Industrial Manufacturing (pipes, machine block, workers)
+ *   6  Strategic Development    (a table with a group seated around it)
+ *   7  Project Identification   (ribbon + floor — motif awaited)
+ *   8  Partner Coordination     (ribbon + floor — motif awaited)
+ *   9  Licensing & Consultancy  (ribbon + floor — motif awaited)
+ *  10  Direct Investment        (ribbon + floor — motif awaited)
+ *  11  People                   (ribbon + floor — motif awaited)
+ *  12  Connected World          (a globe: the world MAP connects)
+ *  13  MAP Holding Convergence  (the ribbon resolves, alone again)
+ *  14  Final MAP M              (the ribbon alone, at its largest)
+ *
+ * The five chapters between Strategic Development and Connected World are the
+ * group's operating methods; their motif arrives with their video, so the
+ * ribbon and the shared floor carry them rather than inventing geometry.
  *
  * The M ribbon is present in every beat as the visual thread and grows back to
  * dominate the identity beat. No 3D library is used (Phase 3 §9): one full
@@ -50,7 +60,7 @@ uniform vec2  uMouse;
 
 out vec4 fragColor;
 
-const float NUM = 8.0;               /* highest scene index (0..8) */
+const float NUM = 14.0;              /* highest chapter index (0..14) */
 
 const vec3 GOLD   = vec3(0.953, 0.588, 0.224);
 const vec3 GOLD_L = vec3(0.969, 0.875, 0.627);
@@ -207,11 +217,17 @@ float strategic(vec3 p){
   d = min(d, personAt(p, vec3( 0.6, 0.0,-0.95), 0.66, 0.0));
   return d;
 }
-/* 7 OPERATIONS — a globe: MAP connects opportunities across the world. */
-float operations(vec3 p){
+/* 12 CONNECTED WORLD — a globe: MAP connects opportunities across the world. */
+float connectedWorld(vec3 p){
   return length(p - vec3(0.0, 1.7, 0.0)) - 1.35;
 }
 
+/*
+ * Chapters 8-12 (indices 7-11) have no motif yet: their motif ships with their
+ * video, so they are deliberately absent here rather than filled with unrelated
+ * geometry. Chapter 15 (index 13 is Convergence, index 14 is the identity) has
+ * no motif either — the ribbon alone is the identity.
+ */
 float sceneAt(int i, vec3 p){
   if (i <= 0) return 1e5;
   if (i == 1) return mining(p);
@@ -220,7 +236,7 @@ float sceneAt(int i, vec3 p){
   if (i == 4) return technology(p);
   if (i == 5) return industrial(p);
   if (i == 6) return strategic(p);
-  if (i == 7) return operations(p);
+  if (i == 12) return connectedWorld(p);
   return 1e5;
 }
 
@@ -232,7 +248,13 @@ vec3 sceneTint(int i){
   if (i == 4) return mix(BLUE, TEAL, 0.5);
   if (i == 5) return mix(GOLD, vec3(0.62, 0.66, 0.72), 0.45);
   if (i == 6) return mix(BLUE, GOLD, 0.35);
-  if (i == 7) return mix(TEAL, BLUE, 0.4);
+  if (i == 7) return mix(BLUE, GOLD, 0.50);
+  if (i == 8) return mix(GOLD, BLUE, 0.50);
+  if (i == 9) return mix(BLUE, TEAL, 0.35);
+  if (i == 10) return mix(GOLD, BLUE, 0.60);
+  if (i == 11) return mix(GOLD, TEAL, 0.50);
+  if (i == 12) return mix(TEAL, BLUE, 0.40);
+  if (i == 13) return mix(GOLD, BLUE, 0.50);
   return mix(GOLD, TEAL, 0.5);
 }
 
@@ -317,9 +339,9 @@ vec3 shade(vec3 p, vec3 n, vec3 rd, float id, vec3 ro){
       float g = smoothstep(0.24, 0.0, length(p - round(p)) - 0.09);
       col += TEAL_L * g * 0.6;
     }
-    /* Operations beat (7): paint a stylised landmask on the globe so it reads
+    /* Connected World (12): paint a stylised landmask on the globe so it reads
        as the world MAP connects, not a plain sphere. */
-    if (iA == 7) {
+    if (iA == 12) {
       vec3 dir = normalize(p - vec3(0.0, 1.7, 0.0));
       float lat = asin(clamp(dir.y, -1.0, 1.0));
       float lon = atan(dir.z, dir.x);
@@ -368,4 +390,4 @@ void main(){
 export const STORY_MAX_STEPS = 128;
 export const STORY_MIN_STEPS = 48;
 export const STORY_MAX_PIXELS = 470_000;
-export const STORY_NUM_SCENES = 9;
+export const STORY_NUM_SCENES = 15;

@@ -4,11 +4,15 @@ import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore
 import { Button } from "@/components/controls/Button";
 import { Badge } from "@/components/feedback/Badge";
 import {
+  CLIENT_ACTIVE_CONVERSATION_STORAGE_KEY,
   CLIENT_CONVERSATIONS_STORAGE_KEY,
   deriveTitle,
+  loadActiveConversationId,
   MAX_CHAT_MESSAGES,
   newConversationId,
   parseStoredConversations,
+  resolveActiveConversationId,
+  saveActiveConversationId,
   saveConversations,
   sanitizeUserMessage,
   toModelPayload,
@@ -94,8 +98,23 @@ export function ClientAssistant({
   setSending,
   refreshIdentity,
 }: ClientAssistantProps) {
-  const [activeId, setActiveId] = useState<string | null>(null);
+  // Open-conversation persistence (client key): a refresh reopens the
+  // thread the user last had open, or their deliberate new conversation.
+  const [activeId, setActiveId] = useState<string | null>(() => {
+    const storage = browserStorage();
+    if (!storage) return null;
+    const stored = loadActiveConversationId(storage, CLIENT_ACTIVE_CONVERSATION_STORAGE_KEY);
+    if (stored !== null) {
+      return resolveActiveConversationId(stored, parseStoredConversations(getStoredSnapshot() || null));
+    }
+    return parseStoredConversations(getStoredSnapshot() || null)[0]?.id ?? null;
+  });
   const [draft, setDraft] = useState("");
+
+  useEffect(() => {
+    const storage = browserStorage();
+    if (storage) saveActiveConversationId(storage, activeId, CLIENT_ACTIVE_CONVERSATION_STORAGE_KEY);
+  }, [activeId]);
   const [sendError, setSendError] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
 

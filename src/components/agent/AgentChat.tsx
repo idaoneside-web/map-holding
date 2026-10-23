@@ -1,13 +1,17 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { Button } from "@/components/controls/Button";
 import {
+  ACTIVE_CONVERSATION_STORAGE_KEY,
   CONVERSATIONS_STORAGE_KEY,
   deriveTitle,
+  loadActiveConversationId,
   MAX_CHAT_MESSAGES,
   newConversationId,
   parseStoredConversations,
+  resolveActiveConversationId,
+  saveActiveConversationId,
   saveConversations,
   sanitizeUserMessage,
   toModelPayload,
@@ -94,8 +98,28 @@ function getServerSnapshot(): string {
 }
 
 export function AgentChat({ baseUrl, identity, approved, sending, setSending }: AgentChatProps) {
-  const [activeId, setActiveId] = useState<string | null>(null);
+  // Which conversation is open survives a refresh: it is restored from
+  // this browser's storage, so returning to the page reopens the thread
+  // the user last had open (or their deliberate "new conversation").
+  const [activeId, setActiveId] = useState<string | null>(() => {
+    const storage = browserStorage();
+    if (!storage) return null;
+    const stored = loadActiveConversationId(storage, ACTIVE_CONVERSATION_STORAGE_KEY);
+    if (stored !== null) {
+      return resolveActiveConversationId(stored, parseStoredConversations(getStoredSnapshot() || null));
+    }
+    // First visit, or the marker was lost: reopen the most recent thread
+    // rather than forcing a blank pane on the user.
+    return parseStoredConversations(getStoredSnapshot() || null)[0]?.id ?? null;
+  });
   const [draft, setDraft] = useState("");
+
+  // Keep the open-conversation marker in sync so the next load restores
+  // exactly what the user last had open (or deliberately cleared).
+  useEffect(() => {
+    const storage = browserStorage();
+    if (storage) saveActiveConversationId(storage, activeId, ACTIVE_CONVERSATION_STORAGE_KEY);
+  }, [activeId]);
   const [sendError, setSendError] = useState<ChatError | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
 

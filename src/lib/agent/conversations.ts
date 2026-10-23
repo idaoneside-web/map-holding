@@ -37,6 +37,12 @@ export const CONVERSATIONS_STORAGE_KEY = "mh-agent:conversations";
  * the internal one so the two experiences never share local history. */
 export const CLIENT_CONVERSATIONS_STORAGE_KEY = "mh-client-agent:conversations";
 
+/** Which conversation each assistant had OPEN — persisted so a browser
+ * refresh restores the open thread instead of dropping to a blank pane.
+ * `""` means the user explicitly chose a new (unsent) conversation. */
+export const ACTIVE_CONVERSATION_STORAGE_KEY = "mh-agent:active-conversation";
+export const CLIENT_ACTIVE_CONVERSATION_STORAGE_KEY = "mh-client-agent:active-conversation";
+
 export const MAX_CONVERSATIONS = 20;
 export const MAX_CHAT_MESSAGES = 60;
 /** UI input cap; the worker separately hard-caps each message at 4000. */
@@ -148,5 +154,48 @@ export function saveConversations(
     storage.setItem(key, JSON.stringify(trimmed));
   } catch {
     // Quota or serialization failure: the UI keeps working in-memory.
+  }
+}
+
+/* --- open-conversation persistence (survives a browser refresh) --------- */
+
+/** Reads the persisted "open conversation" marker. Returns `""` for a
+ * deliberate blank (new-unsent) thread, `null` when nothing was stored
+ * or the value is malformed. */
+export function loadActiveConversationId(
+  storage: AgentStorageLike,
+  key: string,
+): string | null {
+  try {
+    const value = storage.getItem(key);
+    if (value === null) return null;
+    if (value.length === 0) return ""; // deliberate blank
+    return /^[a-z0-9][a-z0-9-]{0,63}$/i.test(value) ? value : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Decides which conversation to open on load: the persisted open id when
+ * it still exists, a deliberate blank, otherwise the most recent one. */
+export function resolveActiveConversationId(
+  stored: string | null,
+  conversations: readonly AgentConversation[],
+): string | null {
+  if (stored === "") return null;
+  if (stored !== null && conversations.some((c) => c.id === stored)) return stored;
+  return conversations.length > 0 ? conversations[0].id : null;
+}
+
+/** Persists the open-conversation marker. Never throws outward. */
+export function saveActiveConversationId(
+  storage: AgentStorageLike,
+  id: string | null,
+  key: string,
+): void {
+  try {
+    storage.setItem(key, id ?? "");
+  } catch {
+    // Quota or serialization failure: in-memory state is unaffected.
   }
 }

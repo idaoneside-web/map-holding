@@ -7,6 +7,7 @@ import { Breadcrumbs, type Crumb } from "@/components/layout/Breadcrumbs";
 import { Heading, Text } from "@/components/typography/Text";
 import { Button } from "@/components/controls/Button";
 import { Badge } from "@/components/feedback/Badge";
+import { ClientAssistantPanel } from "@/components/agent/ClientAssistant";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -72,6 +73,21 @@ export default function BusinessAreasPage() {
           </Container>
         </Section>
       ))}
+
+      <Section tone="default" spacing="lg">
+        <Container>
+          <Stack gap="xl">
+            <SectionHeader
+              eyebrow="Client Assistant"
+              title="Talk to our assistant"
+              lead="Questions about our business areas, or how to start an enquiry with MAP Holding? Ask the assistant here. Client accounts can sign in to use their private assistant; everyone else is shown the sign-in prompt."
+            />
+            <div className={styles.assistantWrap}>
+              <ClientAssistantPanel />
+            </div>
+          </Stack>
+        </Container>
+      </Section>
 
       <Section tone="navy" spacing="lg">
         <Container>

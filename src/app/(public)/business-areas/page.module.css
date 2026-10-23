@@ -10,6 +10,10 @@
 .detailItem { display: flex; align-items: flex-start; gap: var(--space-3); font-size: var(--font-size-body); color: var(--color-text-default); }
 .detailItem::before { content: "—"; color: var(--color-brand-gold-500); flex: none; }
 
+/* The embedded client assistant: capped so the composer stays readable,
+   left-aligned with the section's other content. */
+.assistantWrap { max-width: 960px; }
+
 .ctaTitle { margin: 0; color: var(--color-dark-text-strong); }
 .ctaBody { color: var(--color-dark-text-default); max-width: 52ch; }
 .ctaActions { display: flex; flex-wrap: wrap; gap: var(--space-3); }

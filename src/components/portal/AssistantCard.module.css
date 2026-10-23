@@ -1,0 +1,39 @@
+/* AssistantCard — inner layout inside the accent Panel on the client
+ * portal dashboard. Token-driven, consistent with the portal shell. */
+
+.body {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-raised);
+  color: var(--color-brand-gold-700);
+  flex: none;
+}
+
+.bodyText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.message {
+  margin: 0;
+  font-size: var(--font-size-body-s);
+  line-height: 1.55;
+  color: var(--color-text-default);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-start;
+}

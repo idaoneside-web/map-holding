@@ -74,18 +74,21 @@ function normaliseOrigin(raw: string): string | null {
 export async function loadAgentServiceConfig(): Promise<AgentServiceConfig> {
   try {
     // Development-only: a gitignored override file, if present, wins. In a
-    // production build the file does not exist (it is not committed), so
-    // this fetch 404s and the committed configuration below applies.
-    try {
-      const localRaw = await readConfigFile("/agent-config.local.json");
-      if (localRaw !== null) {
-        const localOrigin = normaliseOrigin(localRaw);
-        if (localOrigin !== null) {
-          return { workerBaseUrl: localOrigin, fromLocalOverride: true };
+    // production build the file cannot exist (it is not committed), so the
+    // request is skipped entirely — production never 404s on it and the
+    // committed configuration below applies.
+    if (process.env.NODE_ENV !== "production") {
+      try {
+        const localRaw = await readConfigFile("/agent-config.local.json");
+        if (localRaw !== null) {
+          const localOrigin = normaliseOrigin(localRaw);
+          if (localOrigin !== null) {
+            return { workerBaseUrl: localOrigin, fromLocalOverride: true };
+          }
         }
+      } catch {
+        /* no local override available — fall through to the committed config */
       }
-    } catch {
-      /* no local override available — fall through to the committed config */
     }
 
     const committedRaw = await readConfigFile("/agent-config.json");

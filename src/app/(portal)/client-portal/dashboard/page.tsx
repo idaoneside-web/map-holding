@@ -6,6 +6,7 @@ import { Button } from "@/components/controls/Button";
 import { Text } from "@/components/typography/Text";
 import { Reveal } from "@/components/motion/Reveal";
 import { Panel } from "@/components/portal/Panel";
+import { AssistantCard } from "@/components/portal/AssistantCard";
 import { PortalPageHeader } from "@/components/portal/PortalPageHeader";
 import { MetricStrip } from "@/components/portal/MetricStrip";
 import { ProgressTracker } from "@/components/portal/ProgressTracker";
@@ -47,6 +48,12 @@ export default function PortalDashboardPage() {
 
         <Reveal>
           <MetricStrip />
+        </Reveal>
+
+        {/* The client's agent, visible on arrival — not just a nav item:
+         * continues this browser's open thread with one click. */}
+        <Reveal>
+          <AssistantCard />
         </Reveal>
 
         <div className={styles.columns}>

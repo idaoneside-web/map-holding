@@ -25,6 +25,7 @@ import {
   sendClientAgentChat,
   type ClientIdentityStatus,
 } from "./clientAgentApi";
+import { buildAgentSignInUrl, isLoopbackAgentBase } from "./agentApi";
 import styles from "./ClientAssistant.module.css";
 
 /** Browser-local conversation store scoped to the CLIENT assistant's key —
@@ -295,13 +296,29 @@ export function ClientAssistant({
                 <>
                   <h3>Sign-in required</h3>
                   <p>
-                    The assistant verifies your identity through the service&rsquo;s own sign-in. Open
-                    the service in a new tab, complete the sign-in, then press <em>Check again</em>. No
-                    e-mail or password is entered or stored here.
+                    The assistant verifies your identity through the service&rsquo;s own sign-in — no
+                    e-mail or password is entered or stored on this page. Use the link below, complete
+                    the sign-in there, then press <em>Check again</em>.
                   </p>
-                  <Button variant="secondary" size="sm" onClick={refreshIdentity}>
-                    Check again
-                  </Button>
+                  <div className={styles.signInRow}>
+                    <a
+                      className={styles.signInLink}
+                      href={buildAgentSignInUrl(baseUrl, "/client-portal/assistant") ?? undefined}
+                      target={baseUrl !== null && isLoopbackAgentBase(baseUrl) ? undefined : "_blank"}
+                      rel={
+                        baseUrl !== null && isLoopbackAgentBase(baseUrl)
+                          ? undefined
+                          : "noopener noreferrer"
+                      }
+                    >
+                      {baseUrl !== null && isLoopbackAgentBase(baseUrl)
+                        ? "Sign in now — you will be returned to this assistant"
+                        : "Open the assistant service to sign in"}
+                    </a>
+                    <Button variant="secondary" size="sm" onClick={refreshIdentity}>
+                      Check again
+                    </Button>
+                  </div>
                 </>
               )}
             </div>

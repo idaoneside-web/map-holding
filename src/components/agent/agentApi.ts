@@ -200,21 +200,27 @@ export function isLoopbackAgentBase(baseUrl: string): boolean {
  * The local session cookie lives on the 127.0.0.1 host, and browsers do
  * not carry a SameSite=Lax cookie from a localhost page to a
  * 127.0.0.1 service — so the return URL always uses 127.0.0.1 with the
- * site's current port. */
-function loopbackSignInReturn(): string {
-  if (typeof window === "undefined") return "http://127.0.0.1:3000/internal";
+ * site's current port. `returnPath` is the site route of the surface that
+ * opened the sign-in page (default: the owners' workspace). */
+function loopbackSignInReturn(returnPath?: string): string {
+  if (typeof window === "undefined") {
+    return `http://127.0.0.1:3000${returnPath ?? "/internal"}`;
+  }
   const port = window.location.port || "3000";
+  if (returnPath !== undefined) return `http://127.0.0.1:${port}${returnPath}`;
   const hash = window.location.hash === "#agent" ? "#agent" : "";
   return `http://127.0.0.1:${port}/internal${hash}`;
 }
 
 /** The sign-in URL for the configured service. Local (loopback) services
  * have a real browser sign-in page; production (https) services are signed
- * in through Cloudflare Access at the edge, so the service root is opened. */
-export function buildAgentSignInUrl(baseUrl: string | null): string | null {
+ * in through Cloudflare Access at the edge, so the service root is opened.
+ * `localReturnPath` is used only for loopback origins: it sets the site
+ * route the local sign-in page returns to after success. */
+export function buildAgentSignInUrl(baseUrl: string | null, localReturnPath?: string): string | null {
   if (baseUrl === null || baseUrl.length === 0) return null;
   if (!isLoopbackAgentBase(baseUrl)) return baseUrl;
-  return `${baseUrl}/dev/signin?next=${encodeURIComponent(loopbackSignInReturn())}`;
+  return `${baseUrl}/dev/signin?next=${encodeURIComponent(loopbackSignInReturn(localReturnPath))}`;
 }
 
 /** Signs out of the LOCAL session: the service revokes the session on its

@@ -29,6 +29,13 @@
   background-color: var(--color-bg-raised);
 }
 
+/* A context-aware raised surface: unlike `raised` (pinned to light-neutral),
+   `surface` follows the *re-pointed* semantic token, so a surface nested in a
+   dark Section picks up the dark raised palette automatically. */
+.tone-surface {
+  background-color: var(--color-bg-raised);
+}
+
 .tone-subtle {
   background-color: var(--color-bg-subtle);
 }

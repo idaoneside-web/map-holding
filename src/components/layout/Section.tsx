@@ -5,6 +5,7 @@ import styles from "./Section.module.css";
 export type SectionTone =
   | "default"
   | "raised"
+  | "surface"
   | "subtle"
   | "navy"
   | "navy-deep"

@@ -1,0 +1,21 @@
+# MAP HOLDING — Vercel deployment exclusions.
+#
+# Defense-in-depth for requirement: the local development agent environment
+# must NEVER ship to production. These patterns exclude, for `vercel` CLI
+# uploads, anything that is (a) already covered by .gitignore or (b) a local
+# build artifact that must not be re-deployed as source.
+
+# Local development agent service (dev-only sign-in page, session server,
+# synthetic .local roster, dev env with credentials)
+worker/local/local.env
+worker/local/dev-users.json
+public/agent-config.local.json
+
+# Build artifacts — never deploy a local out/ as the site (a local out/
+# contains the dev-only agent-config.local.json override)
+out
+.next
+
+# Wrangler config is for the standalone worker; not part of the Vercel site
+wrangler.json
+.wrangler

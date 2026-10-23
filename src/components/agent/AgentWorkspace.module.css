@@ -1,0 +1,139 @@
+/* MAP HOLDING — /internal/agent workspace shell (Phase 3). Tokens only. */
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* --- Masthead ------------------------------------------------------------ */
+
+.masthead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.mastheadLeft {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.mastheadRight {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-h2);
+  color: var(--color-text-strong);
+}
+
+.subtitle {
+  margin: 0;
+  font-size: var(--font-size-body-s);
+  color: var(--color-text-default);
+  max-width: 64ch;
+}
+
+/* --- Identity chips -------------------------------------------------------- */
+
+.chipIdle,
+.chipOk,
+.chipWarn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full, var(--radius-lg));
+  border: var(--border-w-1) solid var(--color-border-default);
+  font-size: var(--font-size-caption);
+  color: var(--color-text-default);
+  background-color: var(--color-bg-raised);
+}
+
+.chipOk {
+  border-color: color-mix(in srgb, var(--color-brand-teal-500) 55%, transparent);
+  background-color: color-mix(in srgb, var(--color-brand-teal-500) 10%, transparent);
+}
+
+.chipWarn {
+  border-color: color-mix(in srgb, var(--color-brand-gold-500) 55%, transparent);
+  background-color: color-mix(in srgb, var(--color-brand-gold-500) 10%, transparent);
+}
+
+/* --- Tabs ------------------------------------------------------------------ */
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  border-bottom: var(--border-w-1) solid var(--color-border-default);
+}
+
+.tab {
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-s);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+}
+
+.tabActive {
+  color: var(--color-text-strong);
+  border-bottom-color: var(--color-brand-gold-500);
+}
+
+/* --- Reserved tool panels -------------------------------------------------- */
+
+.toolPanel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 720px;
+  padding: var(--space-6);
+  border: var(--border-w-1) solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-raised);
+}
+
+.toolTitle {
+  margin: 0;
+  font-size: var(--font-size-h3);
+  color: var(--color-text-strong);
+}
+
+.toolBody {
+  margin: 0;
+  font-size: var(--font-size-body);
+  color: var(--color-text-default);
+}
+
+.toolNote {
+  margin: 0;
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+}
+
+/* --- Footer note ----------------------------------------------------------- */
+
+.footerNote {
+  margin: 0;
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+}
+
+.footerNote code {
+  font-size: var(--font-size-caption);
+}

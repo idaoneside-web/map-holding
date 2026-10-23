@@ -1,0 +1,7 @@
+{
+  "users": [
+    { "email": "<your-address>", "kind": "owner" },
+    { "email": "<another-address>", "kind": "staff" },
+    { "email": "<a-client-address>", "kind": "client" }
+  ]
+}

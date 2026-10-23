@@ -1,0 +1,28 @@
+/* MAP HOLDING — /gallery page module (placeholder structure only).
+   Tokens only; no raw hex values (brand guideline §5). */
+
+.heroInner {
+  padding-block: var(--space-10);
+}
+
+.lead {
+  max-width: 56ch;
+}
+
+/* --- Reserved media frames ------------------------------------------------ */
+
+/* A card that carries one reserved frame — same treatment as the project
+   cards on /projects (border, radius, raised ground). */
+.mediaCard {
+  min-width: 0;
+  border: var(--border-w-1) solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--color-bg-raised);
+}
+
+/* Flatten the reserved frame inside its card so the card owns the outline. */
+.mediaFrame {
+  border-radius: 0;
+  border-bottom: var(--border-w-hair) solid var(--color-border-default);
+}

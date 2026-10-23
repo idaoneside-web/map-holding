@@ -94,4 +94,10 @@ const PATHS: Record<PortalGlyphName, ReactNode> = {
       <path d="M10.5 12H20" />
     </>
   ),
+  assistant: (
+    <>
+      <path d="M4.5 5.5h15a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H9l-4.5 3.5v-3.5h-.5a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1z" />
+      <path d="M8.5 10.5l1.4 2.8 1.4-2.8" />
+    </>
+  ),
 };

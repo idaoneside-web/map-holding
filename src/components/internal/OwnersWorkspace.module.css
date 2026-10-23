@@ -1,0 +1,189 @@
+/* MAP HOLDING — owners' workspace shell (/internal). Navy environment, tokens only.
+   Semantic tokens are re-pointed by the enclosing dark Section, so this module
+   carries no hard-coded light palette. */
+
+.viewNav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  padding-bottom: var(--space-4);
+  border-bottom: var(--border-w-1) solid var(--color-border-default);
+}
+
+.viewTab {
+  appearance: none;
+  border: var(--border-w-1) solid transparent;
+  border-radius: var(--radius-md);
+  background-color: transparent;
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition:
+    background-color var(--motion-duration-fast) ease,
+    color var(--motion-duration-fast) ease,
+    border-color var(--motion-duration-fast) ease;
+}
+
+.viewTab:hover {
+  color: var(--color-text-strong);
+  background-color: var(--color-bg-raised);
+}
+
+.viewTab:focus-visible {
+  outline: var(--border-w-2) solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.viewTabActive {
+  color: var(--color-text-strong);
+  background-color: var(--color-bg-raised);
+  border-color: color-mix(in srgb, var(--color-brand-gold-500) 45%, transparent);
+}
+
+.pendingStrip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+
+.pendingTab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  border: var(--border-w-1) dashed var(--color-border-default);
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+  user-select: none;
+}
+
+.agentSection {
+  min-width: 0;
+}
+
+/* --- Overview (dark-native; the content is the environment's own
+     contract statement, re-rendered on the navy ground) ----------------- */
+
+.heroRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.eyebrow {
+  font-size: var(--font-size-eyebrow);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--font-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.heroTitle {
+  margin: 0;
+  font-size: var(--font-size-h1);
+  line-height: 1.1;
+  color: var(--color-text-strong);
+}
+
+.heroLead {
+  margin: 0;
+  font-size: var(--font-size-body);
+  line-height: 1.6;
+  color: var(--color-text-default);
+  max-width: 78ch;
+}
+
+.overviewGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+@media (max-width: 720px) {
+  .overviewGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.factCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border: var(--border-w-1) solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-raised);
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: var(--font-size-eyebrow);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--font-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-accent-gold, var(--color-brand-gold-300));
+}
+
+.factList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.factList li {
+  position: relative;
+  padding-left: var(--space-4);
+  font-size: var(--font-size-body-s);
+  line-height: 1.5;
+  color: var(--color-text-default);
+}
+
+.factList li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: var(--space-1);
+  height: var(--space-1);
+  border-radius: var(--radius-full);
+  background-color: var(--color-brand-teal-400);
+}
+
+.sectionLead {
+  margin: 0;
+  font-size: var(--font-size-body-s);
+  line-height: 1.6;
+  color: var(--color-text-default);
+}
+
+.inlineLink {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-accent, var(--color-brand-blue-300));
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.inlineLink:hover {
+  color: var(--color-brand-blue-300);
+}
+
+.inlineLink:focus-visible {
+  outline: var(--border-w-2) solid var(--color-focus-ring);
+  outline-offset: 2px;
+}

@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "node --test \"src/lib/access/access.test.ts\"",
+    "test": "node --test \"src/lib/access/access.test.ts\" \"src/lib/agent/conversations.test.ts\"",
+    "test:worker": "node --test \"worker/test/worker.test.ts\"",
+    "dev:agent": "node --env-file-if-exists=\"worker/local/local.env\" \"worker/local/server.ts\"",
+    "test:local": "node --test \"worker/local/local.test.ts\"",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },

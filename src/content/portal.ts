@@ -103,6 +103,7 @@ export type PortalGlyphName =
   | "applications"
   | "documents"
   | "messages"
+  | "assistant"
   | "profile"
   | "settings"
   | "signout";
@@ -125,6 +126,10 @@ export const portalNav: readonly PortalNavItem[] = [
   { label: "My Applications", href: "/client-portal/applications", glyph: "applications" },
   { label: "My Documents", href: "/client-portal/documents", glyph: "documents" },
   { label: "Messages", href: "/client-portal/messages", glyph: "messages", badge: 2 },
+  // The private client assistant. A DISTINCT advisory experience, gated
+  // server-side by the CLIENTS roster and the /client-agent/* boundary — it
+  // never reuses internal capabilities or data (see worker/handler.ts).
+  { label: "Assistant", href: "/client-portal/assistant", glyph: "assistant" },
   { label: "Profile", href: "/client-portal/profile", glyph: "profile" },
   { label: "Settings", href: "/client-portal/settings", glyph: "settings" },
 ];

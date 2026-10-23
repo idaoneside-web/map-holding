@@ -1,0 +1,268 @@
+/* MAP HOLDING — client assistant surface (client portal, Phase 6). Tokens only,
+   so the module re-maps automatically onto the portal's dark foundation. */
+
+.chat {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: var(--space-5);
+  align-items: start;
+  min-height: 480px;
+}
+
+@media (max-width: 720px) {
+  .chat {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+}
+
+/* --- History ------------------------------------------------------------- */
+
+.history {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: var(--border-w-1) solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-raised);
+}
+
+.historyHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.historyTitle {
+  margin: 0;
+  font-size: var(--font-size-h4);
+  color: var(--color-text-strong);
+}
+
+.historyEmpty {
+  margin: 0;
+  font-size: var(--font-size-body-s);
+  color: var(--color-text-muted);
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.historyItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: var(--border-w-1) solid transparent;
+  border-radius: var(--radius-md);
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.historyItem:hover {
+  background-color: color-mix(in srgb, var(--color-brand-teal-500) 8%, transparent);
+}
+
+.historyItemActive {
+  border-color: var(--color-brand-teal-500);
+  background-color: color-mix(in srgb, var(--color-brand-teal-500) 10%, transparent);
+}
+
+.historyItemTitle {
+  font-size: var(--font-size-body-s);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-default);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.historyItemCount {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+}
+
+.historyNote {
+  margin: 0;
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+}
+
+/* --- Thread --------------------------------------------------------------- */
+
+.thread {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+  border: var(--border-w-1) solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-raised);
+  overflow: hidden;
+}
+
+.threadScroll {
+  flex: 1;
+  min-height: 260px;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: var(--space-5);
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  max-width: 75%;
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-w-1) solid var(--color-border-default);
+  border-radius: var(--radius-md);
+}
+
+.messageUser {
+  align-self: flex-end;
+  border-color: color-mix(in srgb, var(--color-brand-teal-500) 40%, transparent);
+  background-color: color-mix(in srgb, var(--color-brand-teal-500) 8%, transparent);
+}
+
+.messageFailed {
+  border-color: color-mix(in srgb, var(--color-brand-gold-500) 55%, transparent);
+  background-color: color-mix(in srgb, var(--color-brand-gold-500) 10%, transparent);
+}
+
+.messagePending {
+  opacity: 0.7;
+}
+
+.messageRole {
+  font-size: var(--font-size-eyebrow);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--font-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.messageBody {
+  margin: 0;
+  font-size: var(--font-size-body);
+  color: var(--color-text-default);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.messageHint {
+  margin: 0;
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+}
+
+.emptyPane {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: var(--border-w-1) dashed var(--color-border-default);
+  border-radius: var(--radius-md);
+}
+
+.emptyPane h3 {
+  margin: 0;
+  font-size: var(--font-size-h4);
+  color: var(--color-text-strong);
+}
+
+.emptyPane p {
+  margin: 0;
+  font-size: var(--font-size-body-s);
+  color: var(--color-text-default);
+  max-width: 60ch;
+}
+
+.scopeNote {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+}
+
+.errorBanner {
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-w-1) solid color-mix(in srgb, var(--color-brand-gold-500) 55%, transparent);
+  border-radius: var(--radius-md);
+  background-color: color-mix(in srgb, var(--color-brand-gold-500) 10%, transparent);
+  font-size: var(--font-size-body-s);
+  color: var(--color-text-default);
+}
+
+.composer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-top: var(--border-w-hair) solid var(--color-border-default);
+}
+
+.composerLabel {
+  font-size: var(--font-size-eyebrow);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--font-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.composerInput {
+  resize: vertical;
+  min-height: 64px;
+  padding: var(--space-3);
+  border: var(--border-w-1) solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-raised);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body);
+  color: var(--color-text-default);
+}
+
+.composerInput:disabled {
+  opacity: 0.55;
+}
+
+.composerActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.composerHint {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+}
+
+.footerNote {
+  margin: var(--space-4) 0 0;
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+}
+
+.footerNote code {
+  font-size: var(--font-size-caption);
+}

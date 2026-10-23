@@ -1,0 +1,4 @@
+{
+  "workerBaseUrl": null,
+  "note": "The Business Agent Worker's origin (e.g. https://map-holding-business-agent.<team>.workers.dev). Leave null until the worker is deployed via Cloudflare and an Access application protects it; fill this field with the deployed origin, then rebuild the site. For local development only, http://127.0.0.1:3300 (the `npm run dev:agent` loopback server) is accepted. While null, the Business Agent section of the owners' workspace at /internal#agent and the client portal assistant show an honest not-configured state and perform no external calls."
+}

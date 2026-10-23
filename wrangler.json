@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.cloudflare.com/schemas/v4/schema/worker/wrangler.schema.json",
+  "name": "map-holding-business-agent",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-07-01"
+}
